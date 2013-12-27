@@ -9,7 +9,7 @@ using namespace std;
 using namespace jailcur;
 
 /* Gets a character from the user. */
-char util::get_ch()
+int util::get_ch()
 {
     return getch();
 }
@@ -35,13 +35,11 @@ void util::clear_screen(WINDOW* win)
 
     for(int i = 0; i < y; ++i)
         for(int k = 0; k < x; ++k)
-        {
-            int rc = mvwaddch(win, i, k, ' ');
-            /*
-            if(rc)
-                throw runtime_error("jailcur: Unable to clear screen");
-                */
-        }
+            mvwaddch(win, i, k, ' ');
+            /* Whilst mvwaddch() appears to produce a return code, it does not
+             * appear to truthfully state how the operation went. Thus, rc-
+             * checking for this function is not being done.
+             */
 }
 
 /* Set video attributes of a window (e.g. give colour to a window). Throws

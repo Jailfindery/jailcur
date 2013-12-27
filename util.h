@@ -15,7 +15,7 @@ namespace jailcur {
 namespace util
 {
 
-char get_ch();
+int get_ch();
 void add_str(string str, WINDOW* win, int y, int x);
 void clear_screen(WINDOW* win);
 void set_attribute(WINDOW* win, int attrib);
