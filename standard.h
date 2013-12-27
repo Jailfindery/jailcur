@@ -13,14 +13,6 @@ namespace jailcur {
 
 class render;   /* Forward reference */
 
-/* A simple coordinate implementation to ease Cartesian point things. */
-struct coordinate
-{
-    coordinate() : x(0), y(0) {}
-    coordinate(int _x, int _y) : x(_x), y(_y) {}
-    int x, y;
-};
-
 /* Static class to manage everything related to curses' stdscr and other
  * global curses data.
  */
@@ -36,18 +28,19 @@ class standard
     /* TODO: Should get_max*() check if jailcur has been started? */
     static int get_maxx() { return maxx; }
     static int get_maxy() { return maxy; }
-    static coordinate get_maxyx() { return coordinate(maxx, maxy); }
     /* Note: get_maxyx() is so named because it is similar to what the
      * equilivalent curses function is named.
      */
 
-    static colour get_bg_colour(colour c) { return bg; }
-    static colour get_text_colour(colour c) { return text; }
+    static colour get_bg_colour() { return bg; }
+    static colour get_text_colour() { return text; }
     static void set_bg_colour(colour c);
     static void set_text_colour(colour c);
 
     static string get_title() { return title; }
     static void set_title(string str) { title = str; }
+
+    static void engage_disco_mode();
 
     static void start();
     static void stop();

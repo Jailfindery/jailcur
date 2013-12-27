@@ -17,8 +17,8 @@ using namespace jailcur;
 bool standard::started = false;
 cp_matrix standard::cp {};
 int standard::current_cp = 0;
-colour standard::bg = colour::cyan;
-colour standard::text = colour::white;
+colour standard::bg = colour::blue;
+colour standard::text = colour::cyan;
 int standard::maxy = -1;
 int standard::maxx = -1;
 string standard::title {};
@@ -56,6 +56,31 @@ void standard::set_text_colour(colour c)
     if(!(c >= colour::min && c < colour::max) )
         throw runtime_error("jailcur: standard: set_text_colour(): out of range");
     text = c;
+}
+
+/* Call for a surprise... */
+void standard::engage_disco_mode()
+{
+    if(!is_started() )
+        throw runtime_error("jailcur: engage_disco_mode(): jailcur not started");
+    colour orig = get_bg_colour();
+    timeout(100);
+
+    int c = util::get_ch();
+    while(c != 10)  /* Enter key */
+    {
+        colour co = get_bg_colour();
+        if(co == colour::cyan) co = colour::min;
+        ++co;
+
+        set_bg_colour(co);
+        render::refresh_standard();
+        c = util::get_ch();
+    }
+    /* Set global attributes back to normal. */
+    set_bg_colour(orig);
+    render::refresh_standard();
+    timeout(-1);
 }
 
 /* Starts the curses environment and sets various preferrable attributes. If
@@ -100,12 +125,11 @@ void standard::init_cp_matrix()
             cp[f][b] = current_cp;
             ++current_cp;
 
-            /* TESTME: May not return an rc. */
-            int rc = init_pair(cp[f][b], f, b);
-            /*
-            if(rc)
-                throw runtime_error("jailcur: Unable to initialize colour pairs");
-                */
+            /* Whilst init_pair() produces a return code, it functions
+             * irrespective of this value. Thus, it will not be checked for
+             * the time being.
+             */
+            init_pair(cp[f][b], f, b);
         }
 }
 
