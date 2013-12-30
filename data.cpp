@@ -5,16 +5,17 @@
 
 using namespace std;
 using namespace jailcur;
+using namespace data;
 
-/* Retrieves the specific data of type T from P and returns it. If data of type
- * T is not stored in P, runtime_error is thrown.
+/* Retrieves the data value of type T stored in P. If P does not store data of
+ * type T, runtime_error is thrown.
  */
 template<typename T>
-T data::get(abstract_data::ptr P)
+T data_cast(abstract_data::ptr P)
 {
-    win_data<T>* D = dynamic_cast<win_data<T>*>(P.get() );
-    if(D == nullptr)
-        throw runtime_error("jailcur: data::get(): Bad cast");
-    return D->get();
+    win_data<T>* data_P = dynamic_cast<win_data<T>*>(P.get() );
+    if(data_P == nullptr)
+        throw runtime_error("jailcur: data_cast(): Bad cast");
+    return data_P->get();
 }
 

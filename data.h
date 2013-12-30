@@ -24,7 +24,6 @@ template<typename T>
 class win_data : public abstract_data
 {
   public:
-    using ptr = unique_ptr<win_data<T> >;   /* FIXME: Is this necessary? */
     win_data(T x) : input(x) {}
     virtual ~win_data() {}
     T get() { return input; }
@@ -32,12 +31,15 @@ class win_data : public abstract_data
     T input;
 };
 
+/* Stores non-member functions on abstract/win_data objects. */
 namespace data
 {
 
-T get(abstract_data::ptr P);
-
-}
+/* Retrieves the data value of type T stored in P. If P does not store data of
+ * type T, runtime_error is thrown.
+ */
+template<typename T>
+T data_cast(abstract_data::ptr P);
 
 }
 
