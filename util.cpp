@@ -51,6 +51,33 @@ void util::delete_win(WINDOW* win)
                             "Unable to delete window.");
 }
 
+/* Draws a border around the perimeter of win. Throw runtime_error on non-zero
+ * return.
+ */
+void util::draw_border(WINDOW* win)
+{
+    int rc = box(win, ACS_VLINE, ACS_HLINE);
+    if(rc)
+        throw runtime_error("jailcur::util::draw_border():"
+                            "Unable to draw border");
+}
+
+/* Draws a centred title on the top row of win. Throws runtime_error on non-zero
+ * return.
+ */
+void util::draw_title(WINDOW* win, string str)
+{
+    int dum, L, offset;
+    getmaxyx(win, dum, L);  /* Get window length, dump height */
+    offset = (L - str.length() + 2 ) / 2;
+
+    string title = ' ' + str + ' ';
+    int rc = mvwaddstr(win, 0, offset, title.c_str() );
+    if(rc)
+        throw runtime_error("jailcur::util::draw_title():"
+                            "Unable to add text to window");
+}
+
 /* Refresh a window on the screen in order to remove overlaps of windows no
  * longer on the screen among other things. Wraps touchwin() and wrefresh().
  */

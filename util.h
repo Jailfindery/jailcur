@@ -19,6 +19,8 @@ int get_ch();
 void add_str(string str, WINDOW* win, int y, int x);
 void clear_screen(WINDOW* win);
 void delete_win(WINDOW* win);
+void draw_border(WINDOW* win);
+void draw_title(WINDOW* win, string str);
 void refresh_win(WINDOW* win);
 void set_attribute(WINDOW* win, int attrib);
 WINDOW* new_win_ptr(int h, int w, int y, int x);

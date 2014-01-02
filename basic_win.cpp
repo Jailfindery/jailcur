@@ -41,12 +41,17 @@ list<WINDOW*> basic_win::create_win_ptr(int y, int x)
     shadow = util::new_win_ptr(get_height(), get_width(), y + 1, x + 2);
     content = util::new_win_ptr(get_height(), get_width(), y, x);
 
+    /* Setting windows to the proper colour */
     util::set_attribute(shadow, standard::get_cp(get_shadow_colour(),
                                                  get_shadow_colour() ) );
     util::clear_screen(shadow);
     util::set_attribute(content, standard::get_cp(get_text_colour(),
                                                   get_bg_colour() ) );
     util::clear_screen(content);
+
+    /* Adding basic content to content window */
+    util::draw_border(content);
+    util::draw_title(content, get_title() );
 
     /* We must create the list at the end in order to have the real pointers. */
     list<WINDOW*> my_list {shadow, content};
