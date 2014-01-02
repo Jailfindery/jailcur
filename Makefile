@@ -1,4 +1,4 @@
-JAILCUR_OBJECTS= obj/basic_win.o obj/colour.o obj/data.o obj/render.o obj/standard.o obj/util.o
+JAILCUR_OBJECTS= obj/basic_win.o obj/colour.o obj/render.o obj/standard.o obj/util.o
 JAILCUR_TEST_OBJECTS= obj/jailcur_test.o
 
 default: jailcur_test

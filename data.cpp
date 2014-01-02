@@ -9,7 +9,7 @@ using namespace jailcur;
  * type T, runtime_error is thrown.
  */
 template<typename T>
-T data_cast(abstract_data::ptr& P)
+T jailcur::data_cast(abstract_data::ptr& P)
 {
     win_data<T>* data_P = dynamic_cast<win_data<T>*>(P.get() );
     if(data_P == nullptr)
