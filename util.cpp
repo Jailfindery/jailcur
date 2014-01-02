@@ -42,6 +42,27 @@ void util::clear_screen(WINDOW* win)
              */
 }
 
+/* Deletes win. Throws runtime_error on error. Wraps delwin() */
+void util::delete_win(WINDOW* win)
+{
+    int rc = delwin(win);
+    if(rc)
+        throw runtime_error("jailcur: util::delete_win(): "
+                            "Unable to delete window.");
+}
+
+/* Refresh a window on the screen in order to remove overlaps of windows no
+ * longer on the screen among other things. Wraps touchwin() and wrefresh().
+ */
+void util::refresh_win(WINDOW* win)
+{
+    int rc1 = touchwin(win);
+    int rc2 = wrefresh(win);
+    if(rc1 || rc2)
+        throw runtime_error("jailcur: util::refresh_win(): "
+                            "Unable to refresh window");
+}
+
 /* Set video attributes of a window (e.g. give colour to a window). Throws
  * std::runtime_error on failure.
  */
@@ -49,6 +70,19 @@ void util::set_attribute(WINDOW* win, int attrib)
 {
     int rc = wattrset(win, attrib);
     if(rc)
-        throw runtime_error("jailcur: util::set_attribute: Unable to set attribute(s)");
+        throw runtime_error("jailcur: util::set_attribute: "
+                            "Unable to set attribute(s)");
+}
+
+/* Creates a WINDOW* with height h and width w, with the top left corner at
+ * point (x, y) relative to the top left corner of the screen. Throws runtime_
+ * error on error. It acts as a wrapper for newwin().
+ */
+WINDOW* util::new_win_ptr(int h, int w, int y, int x)
+{
+    WINDOW* win = newwin(h, w, y, x);
+    if(win == nullptr)
+        throw runtime_error("jailcur: create_win_ptr(): Cannot create window");
+    return win;
 }
 

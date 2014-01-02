@@ -10,6 +10,8 @@
 #include "data.h"
 #include "standard.h"
 
+#include "win_interface.h"
+
 namespace jailcur
 {
 
@@ -26,11 +28,11 @@ class basic_win : public win_interface
               colour f = colour::black,
               colour b = colour::white,
               colour s = colour::black)
-        : title(t), height(h), width(w), text(f), bg(b), shadow(s)
+        : win_interface(t, h, w, f, b, s)
     {}
 
   private:
-    /* TODO: Define these member functions */
+    virtual const int get_list_size() { return 2; }
     virtual abstract_data::ptr get_input();
     virtual list<WINDOW*> create_win_ptr(int y, int x);
 };

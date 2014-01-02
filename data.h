@@ -2,6 +2,7 @@
 #define JAILCUR_DATA_H_INCLUDED
 
 #include <memory>
+#include <stdexcept>
 
 using namespace std;
 
@@ -31,15 +32,11 @@ class win_data : public abstract_data
     T input;
 };
 
-/* Stores non-member functions on abstract/win_data objects. */
-namespace data
-{
-
 /* Retrieves the data value of type T stored in P. If P does not store data of
  * type T, runtime_error is thrown.
  */
 template<typename T>
-T data_cast(abstract_data::ptr P);
+T data_cast(abstract_data::ptr& P);
 
 }
 

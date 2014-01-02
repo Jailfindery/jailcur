@@ -74,12 +74,12 @@ void standard::engage_disco_mode()
         ++co;
 
         set_bg_colour(co);
-        render::refresh_standard();
+        render::refresh_all();
         c = util::get_ch();
     }
     /* Set global attributes back to normal. */
     set_bg_colour(orig);
-    render::refresh_standard();
+    render::refresh_all();
     timeout(-1);
 }
 
@@ -100,13 +100,22 @@ void standard::start()
     keypad(standard_win, true); /* Enables getting arrow key presses.   */
     curs_set(0);                /* Disables the cursor.                 */
 
+    /* Set x and y dimensions of screen.
+     * TODO: Allow for maximum dimensions to be changed throughout program.
+     *       Also, error checking?
+     */
+    getmaxyx(standard_win, maxy, maxx); 
+
     /* TODO: Configure cp's on demand. */
     init_cp_matrix();           /* Initializes colour all colour pairs. */
 
     render::refresh_standard(); /* Draws standard on screen. */
 }
 
-/* Stops the curses environment. Throws std::runtime_error on error. */
+/* Stops the curses environment. Throws std::runtime_error on error.
+ *
+ * TODO: Ensure all WINDOW* objects on render stack have been freed.
+ */
 void standard::stop()
 {
     int rc = endwin();
