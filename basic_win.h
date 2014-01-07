@@ -46,6 +46,9 @@ class basic_win : public win_interface
     void set_height(int h) { height = h; }
     void set_width(int w) { width = w; }
 
+  protected:
+    virtual list<WINDOW*> create_win_ptr(int y, int x);
+
   private:
     colour bg_colour, shadow_colour, text_colour;
     int height, width;
@@ -53,7 +56,6 @@ class basic_win : public win_interface
 
     virtual const int get_list_size() { return 2; }
     virtual abstract_data::ptr get_input();
-    virtual list<WINDOW*> create_win_ptr(int y, int x);
 };
 
 }

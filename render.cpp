@@ -127,7 +127,7 @@ void render::pull_top()
     try
     {
         if(desc_stack.empty() )
-            throw runtime_error("jailcur::render::put_top(): "
+            throw runtime_error("jailcur::render::pull_top(): "
                                 "Empty window stack.");
 
         win_interface* temp = desc_stack.back();

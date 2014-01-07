@@ -16,6 +16,7 @@ namespace util
 {
 
 int get_ch();
+void add_ch(char c, WINDOW* win, int y, int x);
 void add_str(string str, WINDOW* win, int y, int x);
 void clear_screen(WINDOW* win);
 void delete_win(WINDOW* win);

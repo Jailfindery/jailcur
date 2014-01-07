@@ -14,6 +14,15 @@ int util::get_ch()
     return getch();
 }
 
+/* Adds a character to win at point (y,x). On error, runtime_error is thrown. */
+void util::add_ch(char c, WINDOW* win, int y, int x)
+{
+    int rc = mvwaddch(win, y, x, c);
+    if(rc)
+        throw runtime_error("jailcur::util::add_ch(): "
+                            "Unable to add character to window");
+}
+
 /* Add a string str to window win at position (y,x). On error,
  * std::runtime_error is thrown.
  */
@@ -67,9 +76,11 @@ void util::draw_border(WINDOW* win)
  */
 void util::draw_title(WINDOW* win, string str)
 {
+    if(str.length() == 0) return;   // Don't need to draw it
+
     int dum, L, offset;
     getmaxyx(win, dum, L);  /* Get window length, dump height */
-    offset = (L - str.length() + 2 ) / 2;
+    offset = (L - (str.length() + 2) ) / 2;
 
     string title = ' ' + str + ' ';
     int rc = mvwaddstr(win, 0, offset, title.c_str() );
