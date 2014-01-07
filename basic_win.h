@@ -22,16 +22,35 @@ class basic_win : public win_interface
   friend class render;
 
   public:
-    basic_win(string t,
+    basic_win(string t = "",
               int h = standard::get_maxy() - 4,
               int w = standard::get_maxx() - 4,
               colour f = colour::black,
               colour b = colour::white,
               colour s = colour::black)
-        : win_interface(t, h, w, f, b, s)
+        : title(t), height(h), width(w), text_colour(f), bg_colour(b),
+          shadow_colour(s)
     {}
+    colour get_bg_colour() { return bg_colour; }
+    colour get_shadow_colour() { return shadow_colour; }
+    colour get_text_colour() { return text_colour; }
+    void set_bg_colour(colour c) { bg_colour = c; }
+    void set_shadow_colour(colour c) { shadow_colour = c; }
+    void set_text_colour(colour c) { text_colour = c; }
+
+    string get_title() { return title; }
+    void set_title(string str) { title = str; }
+
+    int get_height() { return height; }
+    int get_width() { return width; }
+    void set_height(int h) { height = h; }
+    void set_width(int w) { width = w; }
 
   private:
+    colour bg_colour, shadow_colour, text_colour;
+    int height, width;
+    string title;
+
     virtual const int get_list_size() { return 2; }
     virtual abstract_data::ptr get_input();
     virtual list<WINDOW*> create_win_ptr(int y, int x);
