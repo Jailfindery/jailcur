@@ -93,7 +93,8 @@ void standard_screen::start()
 {
     standard_win = initscr();   /* Start curses environment.            */
     if(standard_win == nullptr)
-        throw runtime_error("jailcur: Unable to start jailcur");
+        throw runtime_error("jailcur::standard::start():"
+                            "Unable to start jailcur");
     started = true;
 
     timeout(-1);                /* Use blocking when reading input.     */
@@ -123,7 +124,8 @@ void standard_screen::stop()
 {
     int rc = endwin();
     if(rc)
-        throw runtime_error("jailcur: Unable to stop jailcur; force stopping?");
+        throw runtime_error("jailcur::standard::stop(): "
+                            "Unable to stop jailcur");
     started = false;
 }
 

@@ -1,6 +1,9 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "jailcur.h"
+
+/*
 #include "basic_message_win.h"
 #include "basic_win.h"
 #include "colour.h"
@@ -9,6 +12,7 @@
 #include "render.h"
 #include "standard.h"
 #include "util.h"
+*/
 
 using namespace jailcur;
 
