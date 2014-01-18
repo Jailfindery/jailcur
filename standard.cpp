@@ -77,12 +77,12 @@ void standard_screen::engage_disco_mode()
         ++co;
 
         set_bg_colour(co);
-        render::refresh_all();
+        render.refresh_all();
         c = util::get_ch();
     }
     /* Set global attributes back to normal. */
     set_bg_colour(orig);
-    render::refresh_all();
+    render.refresh_all();
     timeout(-1);
 }
 
@@ -112,7 +112,7 @@ void standard_screen::start()
     /* TODO: Configure cp's on demand. */
     init_cp_matrix();           /* Initializes colour all colour pairs. */
 
-    render::refresh_standard(); /* Draws standard on screen. */
+    render.refresh_standard(); /* Draws standard on screen. */
 }
 
 /* Stops the curses environment. Throws std::runtime_error on error.

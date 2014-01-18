@@ -14,14 +14,14 @@ using namespace std;
 namespace jailcur
 {
 
-class render;   /* Forward declaration */
+class window_render;   /* Forward declaration */
 
 /* Acts as an interface for all window objects. Allows any type of window to be
  * rendered by render.
  */
 class win_interface
 {
-  friend class render;
+  friend class window_render;
 
   public:
     win_interface() {}

@@ -42,24 +42,24 @@ int main()
         my_win4.set_width(60);
 
         util::get_ch();
-        render::put_top(&my_win1, 2, 2);
+        render.put_top(&my_win1, 2, 2);
         util::get_ch();
-        render::put_top(&my_win2, 5, 5);
+        render.put_top(&my_win2, 5, 5);
         util::get_ch();
-        render::put_top(&my_win4, 11, 11);
+        render.put_top(&my_win4, 11, 11);
         util::get_ch();
-        render::put_top(&my_win3, 8, 8);
+        render.put_top(&my_win3, 8, 8);
 
         util::get_ch();
         standard.engage_disco_mode();
 
         for(int i = 0 ; i < 4; ++i)
         {
-            abstract_data::ptr P = render::get_top_input();
+            abstract_data::ptr P = render.get_top_input();
             bool D = data_cast<bool>(P);
             if(!D) throw runtime_error("False return from window");
 
-            render::pull_top();
+            render.pull_top();
         }
 
         util::get_ch();

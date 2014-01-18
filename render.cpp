@@ -14,14 +14,17 @@ using namespace std;
 using namespace jailcur;
 
 /* Static members for render */
-vector<pair<int, int> > render::coordinate_stack {};
-vector<WINDOW*> render::on_screen_stack {};
-vector<win_interface*> render::desc_stack {};
+vector<pair<int, int> > window_render::coordinate_stack {};
+vector<WINDOW*> window_render::on_screen_stack {};
+vector<win_interface*> window_render::desc_stack {};
+
+/* Creation of window_render object */
+window_render render {};
 
 /* Empties both the desc_stack and on_screen_stack objects, and deletes all
  * WINDOW*.
  */
-void render::empty()
+void window_render::empty()
 {
     try
     {
@@ -41,7 +44,7 @@ void render::empty()
 }
 
 /* TODO: Recreates all WINDOW* objects and refreshes them. */
-void render::rebuild_all()
+void window_render::rebuild_all()
 {
     try
     {
@@ -55,7 +58,7 @@ void render::rebuild_all()
  * object and refreshes them. Uses coordinate_stack to get the coordinate for
  * the WINDOW*.
  */
-void render::rebuild_top()
+void window_render::rebuild_top()
 {
     try
     {
@@ -82,7 +85,7 @@ void render::rebuild_top()
 }
 
 /* Refreshes all WINDOW* on the on_screen_stack. */
-void render::refresh_all()
+void window_render::refresh_all()
 {
     try
     {
@@ -98,7 +101,7 @@ void render::refresh_all()
 /* Gets the WINDOW* from the description of standard and draws it on the
  * screen.
  */
-void render::refresh_standard()
+void window_render::refresh_standard()
 {
     try
     {
@@ -109,7 +112,7 @@ void render::refresh_standard()
 }
 
 /* Refreshes the WINDOW* at the top (i.e. back) of the on_screen_stack. */
-void render::refresh_top()
+void window_render::refresh_top()
 {
     try
     {
@@ -122,7 +125,7 @@ void render::refresh_top()
  * on_screen_stack and coordinate_stack. Then it refreshes all elements of
  * the on_screen_stack.
  */
-void render::pull_top()
+void window_render::pull_top()
 {
     try
     {
@@ -148,7 +151,7 @@ void render::pull_top()
  * the on_screen_stack. The WINDOW* are then rendered on the screen. Throws
  * runtime_error if no windows are on the stack.
  */
-void render::put_top(win_interface* n_win, int y, int x)
+void window_render::put_top(win_interface* n_win, int y, int x)
 {
     try
     {

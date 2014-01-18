@@ -11,14 +11,14 @@ using namespace std;
 
 namespace jailcur {
 
-class render;   /* Forward reference */
+class window_render;   /* Forward reference */
 
 /* Static class to manage everything related to curses' stdscr and other
  * global curses data.
  */
 class standard_screen
 {
-  friend class render;
+  friend class window_render;
 
   public:
     standard_screen() {}

@@ -16,10 +16,10 @@ namespace jailcur {
  *
  * Note that for stack objects, back is equilivalent to the top.
  */
-class render
+class window_render
 {
   public:
-    render() = delete;
+    window_render() {}
 
     static abstract_data::ptr get_top_input() { return get_top()->get_input(); }
 
@@ -47,6 +47,8 @@ class render
     static vector<WINDOW*> on_screen_stack;
     static vector<win_interface*> desc_stack;
 };
+
+static window_render render;
 
 }
 
