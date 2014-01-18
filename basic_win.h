@@ -23,8 +23,8 @@ class basic_win : public win_interface
 
   public:
     basic_win(string t = "",
-              int h = standard::get_maxy() - 4,
-              int w = standard::get_maxx() - 4,
+              int h = standard.get_maxy() - 4,
+              int w = standard.get_maxx() - 4,
               colour f = colour::black,
               colour b = colour::white,
               colour s = colour::black)

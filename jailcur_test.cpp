@@ -16,8 +16,8 @@ int main()
 {
     try
     {
-        standard::set_title("jailcur Test Program");
-        standard::start();
+        standard.set_title("jailcur Test Program");
+        standard.start();
 
         basic_win my_win1("", 15, 60, colour::magenta, colour::green, colour::magenta);
         basic_win my_win2("Hello, world!", 15, 60, colour::blue, colour::yellow, colour::red);
@@ -51,7 +51,7 @@ int main()
         render::put_top(&my_win3, 8, 8);
 
         util::get_ch();
-        standard::engage_disco_mode();
+        standard.engage_disco_mode();
 
         for(int i = 0 ; i < 4; ++i)
         {
@@ -63,11 +63,11 @@ int main()
         }
 
         util::get_ch();
-        standard::stop();
+        standard.stop();
     }
     catch(...)
     {
-        standard::stop();
+        standard.stop();
         throw;  /* Let the default handler do its thing. */
     }
 }

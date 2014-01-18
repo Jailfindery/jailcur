@@ -23,7 +23,7 @@ list<WINDOW*> message_win::create_win_ptr(int y, int x)
         for(int y = get_height() - 3, x = 1; x < get_width() - 1; ++x)
             util::add_ch(' ', content_win, y, x);
 
-        util::set_attribute(content_win, standard::get_cp(colour::white,
+        util::set_attribute(content_win, standard.get_cp(colour::white,
                                                           colour::red) );
         int o = (get_width() - button_text.length() ) / 2;     // Button offset
         string::iterator i = button_text.begin();

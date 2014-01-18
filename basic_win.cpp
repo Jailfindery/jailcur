@@ -46,10 +46,10 @@ list<WINDOW*> basic_win::create_win_ptr(int y, int x)
         content = util::new_win_ptr(get_height(), get_width(), y, x);
 
         /* Setting windows to the proper colour */
-        util::set_attribute(shadow, standard::get_cp(get_shadow_colour(),
+        util::set_attribute(shadow, standard.get_cp(get_shadow_colour(),
                                                      get_shadow_colour() ) );
         util::clear_screen(shadow);
-        util::set_attribute(content, standard::get_cp(get_text_colour(),
+        util::set_attribute(content, standard.get_cp(get_text_colour(),
                                                       get_bg_colour() ) );
         util::clear_screen(content);
 

@@ -14,15 +14,18 @@ using namespace jailcur;
 /* FIXME: Error checking on _all_ applicable calls from curses. */
 
 /* Initialization of static members of standard */
-bool standard::started = false;
-cp_matrix standard::cp {};
-int standard::current_cp = 0;
-colour standard::bg = colour::blue;
-colour standard::text = colour::cyan;
-int standard::maxy = -1;
-int standard::maxx = -1;
-string standard::title {};
-WINDOW* standard::standard_win = nullptr;
+bool standard_screen::started = false;
+cp_matrix standard_screen::cp {};
+int standard_screen::current_cp = 0;
+colour standard_screen::bg = colour::blue;
+colour standard_screen::text = colour::cyan;
+int standard_screen::maxy = -1;
+int standard_screen::maxx = -1;
+string standard_screen::title {};
+WINDOW* standard_screen::standard_win = nullptr;
+
+/* Creation of centralized standard screen object */
+standard_screen standard {};
 
 /* Gets the colour pair from the table generated at start up. As a result,
  * standard::start() must be run in order to have it available. If it has not
@@ -31,7 +34,7 @@ WINDOW* standard::standard_win = nullptr;
  * The value from the table is processed through COLOR_PAIR so the result can
  * be immediately used as a video attribute.
  */
-int standard::get_cp(colour f, colour b)
+int standard_screen::get_cp(colour f, colour b)
 {
     if(!is_started() )
         throw runtime_error("jailcur: standard: get_cp(): jailcur not started");
@@ -41,7 +44,7 @@ int standard::get_cp(colour f, colour b)
 /* Set the background colour to c. If c is not in [colour::min, colour::max),
  * std::runtime_error is thrown.
  */
-void standard::set_bg_colour(colour c)
+void standard_screen::set_bg_colour(colour c)
 {
     if(!(c >= colour::min && c < colour::max) )
         throw runtime_error("jailcur: standard: set_bg_colour(): out of range");
@@ -51,7 +54,7 @@ void standard::set_bg_colour(colour c)
 /* Set the text colour to c. If c is not in [colour::min, colour::max),
  * std::runtime_error is thrown.
  */
-void standard::set_text_colour(colour c)
+void standard_screen::set_text_colour(colour c)
 {
     if(!(c >= colour::min && c < colour::max) )
         throw runtime_error("jailcur: standard: set_text_colour(): out of range");
@@ -59,7 +62,7 @@ void standard::set_text_colour(colour c)
 }
 
 /* Call for a surprise... */
-void standard::engage_disco_mode()
+void standard_screen::engage_disco_mode()
 {
     if(!is_started() )
         throw runtime_error("jailcur: engage_disco_mode(): jailcur not started");
@@ -86,7 +89,7 @@ void standard::engage_disco_mode()
 /* Starts the curses environment and sets various preferrable attributes. If
  * startup fails, std::runtime_error is thrown.
  */
-void standard::start()
+void standard_screen::start()
 {
     standard_win = initscr();   /* Start curses environment.            */
     if(standard_win == nullptr)
@@ -116,7 +119,7 @@ void standard::start()
  *
  * TODO: Ensure all WINDOW* objects on render stack have been freed.
  */
-void standard::stop()
+void standard_screen::stop()
 {
     int rc = endwin();
     if(rc)
@@ -124,7 +127,7 @@ void standard::stop()
     started = false;
 }
 
-void standard::init_cp_matrix()
+void standard_screen::init_cp_matrix()
 {
     for(colour c = colour::min; c < colour::max; ++c)
         for(colour d = colour::min; d < colour::max; ++d)
@@ -142,7 +145,7 @@ void standard::init_cp_matrix()
         }
 }
 
-WINDOW* standard::create_win_ptr()
+WINDOW* standard_screen::create_win_ptr()
 {
     util::set_attribute(standard_win, get_cp(text, bg) | A_BOLD );
     util::clear_screen(standard_win);

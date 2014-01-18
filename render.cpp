@@ -102,7 +102,7 @@ void render::refresh_standard()
 {
     try
     {
-        WINDOW* stdw = standard::create_win_ptr();
+        WINDOW* stdw = standard.create_win_ptr();
         util::refresh_win(stdw);
     }
     catch(...) { throw; }

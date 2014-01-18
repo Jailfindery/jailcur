@@ -16,11 +16,13 @@ class render;   /* Forward reference */
 /* Static class to manage everything related to curses' stdscr and other
  * global curses data.
  */
-class standard
+class standard_screen
 {
   friend class render;
 
   public:
+    standard_screen() {}
+
     static bool is_started() { return started; }
 
     static int get_cp(colour f, colour b);
@@ -62,6 +64,8 @@ class standard
 
     static WINDOW* create_win_ptr();
 };
+
+static standard_screen standard;
 
 }
 
