@@ -1,5 +1,6 @@
 JAILCUR_OBJECTS= obj/basic_message_win.o obj/basic_win.o obj/colour.o \
-                 obj/message_win.o obj/render.o obj/standard.o obj/util.o
+                 obj/message_win.o obj/progress_win.o obj/render.o \
+                 obj/standard.o obj/util.o
 JAILCUR_TEST_OBJECTS= obj/jailcur_test.o
 
 default: jailcur_test
@@ -24,6 +25,9 @@ obj/jailcur_test.o: jailcur_test.cpp
 
 obj/message_win.o: message_win.cpp
 	g++ message_win.cpp -c -std=c++11 -o obj/message_win.o
+
+obj/progress_win.o: progress_win.cpp
+	g++ progress_win.cpp -c -std=c++11 -o obj/progress_win.o
 
 obj/render.o: render.cpp
 	g++ render.cpp -c -std=c++11 -o obj/render.o

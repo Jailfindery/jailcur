@@ -8,6 +8,7 @@
 #include "colour.h"
 #include "data.h"
 #include "message_win.h"
+#include "progress_win.h"
 #include "render.h"
 #include "standard.h"
 #include "util.h"

@@ -23,7 +23,7 @@ class window_render
 
     static abstract_data::ptr get_top_input() { return get_top()->get_input(); }
 
-    static int win_stack_size() { return desc_stack.size(); }
+    static int size() { return desc_stack.size(); }
 
     static void empty();
 

@@ -45,6 +45,14 @@ int main()
         my_win4.set_height(15);
         my_win4.set_width(60);
 
+        int n = 0;
+        int d = 11;
+        progress_win my_p(n, d);
+        my_p.set_title("Progress Test");
+        my_p.set_height(15);
+        my_p.set_width(71);
+        my_p.set_message("Press a button to increase progress.");
+
         util::get_ch();
         render.put_top(&my_win1, 2, 2);
         util::get_ch();
@@ -53,11 +61,25 @@ int main()
         render.put_top(&my_win4, 11, 11);
         util::get_ch();
         render.put_top(&my_win3, 8, 8);
+        util::get_ch();
+        render.put_top(&my_p, 4, 4);
 
         util::get_ch();
         standard.engage_disco_mode();
 
-        for(int i = 0 ; i < 4; ++i)
+        /* Testing the progress win */
+        while(!my_p.is_complete() )
+        {
+            util::get_ch();
+            ++n;
+            render.rebuild_top();
+        }
+        util::get_ch();
+        ++n;
+        render.rebuild_top();
+
+        /* Removing windows */
+        while(render.size() > 0)
         {
             abstract_data::ptr P = render.get_top_input();
             bool D = data_cast<bool>(P);
@@ -74,5 +96,6 @@ int main()
         standard.stop();
         throw;  /* Let the default handler do its thing. */
     }
+
 }
 
