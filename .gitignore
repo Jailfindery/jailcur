@@ -12,6 +12,9 @@
 *.la
 *.a
 
+# Licensing meta-data
+license_note.txt
+
 # Directories
 obj/
 bin/
