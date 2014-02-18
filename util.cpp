@@ -124,3 +124,16 @@ WINDOW* util::new_win_ptr(int h, int w, int y, int x)
     return win;
 }
 
+/* Creates a WINDOW* that has been derived from another WINDOW*, b. The y and x
+ * coordinates are relative to the upper left corner of b. Throws runtime_error
+ * on error. It acts as a wrapper for derwin().
+ */
+WINDOW* util::derive_win(WINDOW* b, int h, int w, int y, int x)
+{
+    WINDOW* sub = derwin(b, h, w, y, x);
+    if(sub == nullptr)
+        throw runtime_error("jailcur::derive_win(): "
+                            "Cannot create derived window");
+    return sub;
+}
+

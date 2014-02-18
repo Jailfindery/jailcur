@@ -25,6 +25,7 @@ void draw_title(WINDOW* win, string str);
 void refresh_win(WINDOW* win);
 void set_attribute(WINDOW* win, int attrib);
 WINDOW* new_win_ptr(int h, int w, int y, int x);
+WINDOW* derive_win(WINDOW* b, int h, int w, int y, int x);
 
 }
 

@@ -46,12 +46,15 @@ int main()
         my_win4.set_width(60);
 
         int n = 0;
-        int d = 11;
+        int d = 5;
         progress_win my_p(n, d);
         my_p.set_title("Progress Test");
         my_p.set_height(15);
         my_p.set_width(71);
         my_p.set_message("Press a button to increase progress.");
+
+        // Constructor is protected, so an object can not be created.
+        //basic_cwin my_cwin;
 
         util::get_ch();
         render.put_top(&my_win1, 2, 2);

@@ -3,6 +3,7 @@
 
 /* Meta-header to easily include all necessary headers for jailcur. */
 
+#include "basic_cwin.h"
 #include "basic_message_win.h"
 #include "basic_win.h"
 #include "colour.h"

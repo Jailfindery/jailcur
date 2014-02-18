@@ -1,5 +1,5 @@
-JAILCUR_OBJECTS= obj/basic_message_win.o obj/basic_win.o obj/colour.o \
-                 obj/message_win.o obj/progress_win.o obj/render.o \
+JAILCUR_OBJECTS= obj/basic_cwin.o obj/basic_message_win.o obj/basic_win.o \
+                 obj/colour.o obj/message_win.o obj/progress_win.o obj/render.o \
                  obj/standard.o obj/util.o
 JAILCUR_TEST_OBJECTS= obj/jailcur_test.o
 
@@ -7,6 +7,9 @@ default: jailcur_test
 
 jailcur_test: $(JAILCUR_OBJECTS) $(JAILCUR_TEST_OBJECTS)
 	g++ $(JAILCUR_OBJECTS) $(JAILCUR_TEST_OBJECTS) -o bin/jailcur_test -lcurses
+
+obj/basic_cwin.o: basic_cwin.cpp
+	g++ basic_cwin.cpp -c -std=c++11 -o obj/basic_cwin.o
 
 obj/basic_message_win.o: basic_message_win.cpp
 	g++ basic_message_win.cpp -c -std=c++11 -o obj/basic_message_win.o
