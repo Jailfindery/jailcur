@@ -16,6 +16,7 @@
 #include "basic_win.h"
 #include "colour.h"
 #include "data.h"
+#include "menu_window.h"
 #include "message_win.h"
 #include "progress_win.h"
 #include "render.h"

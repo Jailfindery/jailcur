@@ -35,7 +35,7 @@ class basic_message_win : public basic_win
                       colour f = colour::black,
                       colour b = colour::white,
                       colour s = colour::black)
-        : message(m), basic_win(t, h, w, f, b, s)
+        : basic_win(t, h, w, f, b, s), message(m)
     {}
     string get_message() { return message; }
     void set_message(string str) { message = str; }

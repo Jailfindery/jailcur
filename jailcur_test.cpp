@@ -26,13 +26,15 @@ using namespace jailcur;
 
 int main()
 {
+    int choice;     // Required for testing jailcur::menu_win
+
     try
     {
         standard.set_title("jailcur Test Program");
         standard.start();
 
         basic_win my_win1("", 15, 60, colour::magenta, colour::green, colour::magenta);
-        basic_win my_win2("Hello, world!", 15, 60, colour::blue, colour::yellow, colour::red);
+        basic_win my_win2("Hello, world!", 15, 60, colour::yellow, colour::black, colour::red);
 
         message_win my_win3("That's alright...");
         my_win3.set_title("User-Friendly Message Window");
@@ -53,6 +55,16 @@ int main()
         my_win4.set_height(15);
         my_win4.set_width(60);
 
+        menu_window my_menu;
+        my_menu.set_height(20);
+        my_menu.set_width(65);
+        my_menu.set_title("Menu Test");
+        my_menu.set_message("Please select an entry: ");
+        my_menu.add_item("Item Zero");
+        my_menu.add_item("Item One");
+        my_menu.add_item("Item Two");
+        my_menu.set_highlight_bg_colour(colour::green);
+
         int n = 0;
         int d = 5;
         progress_win my_p(n, d);
@@ -64,6 +76,8 @@ int main()
         // Constructor is protected, so an object can not be created.
         //basic_cwin my_cwin;
 
+        util::get_ch();
+        render.put_top(&my_menu, 15, 15);
         util::get_ch();
         render.put_top(&my_win1, 2, 2);
         util::get_ch();
@@ -90,7 +104,7 @@ int main()
         render.rebuild_top();
 
         /* Removing windows */
-        while(render.size() > 0)
+        while(render.size() > 1)    // Leave the menu
         {
             abstract_data::ptr P = render.get_top_input();
             bool D = data_cast<bool>(P);
@@ -99,7 +113,11 @@ int main()
             render.pull_top();
         }
 
-        util::get_ch();
+        /* Testing the menu win */
+        auto P = render.get_top_input();
+        choice = data_cast<int>(P);
+        render.pull_top();
+
         standard.stop();
     }
     catch(...)
@@ -108,5 +126,6 @@ int main()
         throw;  /* Let the default handler do its thing. */
     }
 
+    cout << "You selected: " << choice << endl;
 }
 

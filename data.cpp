@@ -6,12 +6,15 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
+/*****************************************/
+/***** NB! This file is depreciated. *****/
+/*****************************************/
+
 #include <stdexcept>
 
 #include "data.h"
 
 using namespace std;
-using namespace jailcur;
 
 /* Retrieves the data value of type T stored in P. If P does not store data of
  * type T, runtime_error is thrown.

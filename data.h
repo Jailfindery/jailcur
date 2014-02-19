@@ -43,8 +43,8 @@ class win_data : public abstract_data
 /* Retrieves the data value of type T stored in P. If P does not store data of
  * type T, runtime_error is thrown.
  *
- * FIXME: Should be implemented in data.cpp, but doing so causes an undefined
- *        reference error.
+ * Note: This function is defined here as the C++ Standard does not allow
+ *       putting it in a separate file.
  */
 template<typename T>
 T data_cast(abstract_data::ptr& P)

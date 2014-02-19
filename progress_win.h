@@ -34,8 +34,8 @@ class progress_win : public basic_message_win
                  colour f = colour::black,
                  colour b = colour::white,
                  colour s = colour::black)
-        : numerator(num), denominator(den),
-          basic_message_win(m, t, h, w, f, b, s)
+        : basic_message_win(m, t, h, w, f, b, s),
+          numerator(num), denominator(den)
     {}
     bool is_complete();
 

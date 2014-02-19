@@ -36,8 +36,8 @@ class basic_win : public win_interface
               colour f = colour::black,
               colour b = colour::white,
               colour s = colour::black)
-        : title(t), height(h), width(w), text_colour(f), bg_colour(b),
-          shadow_colour(s)
+        : bg_colour(b), shadow_colour(s), text_colour(f), height(h), width(w),
+          title(t)
     {}
     colour get_bg_colour() { return bg_colour; }
     colour get_shadow_colour() { return shadow_colour; }
