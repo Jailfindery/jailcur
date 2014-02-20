@@ -16,6 +16,7 @@
 #include "basic_window.h"
 #include "colour.h"
 #include "data.h"
+#include "jailcur_except.h"
 #include "menu_window.h"
 #include "message_window.h"
 #include "progress_window.h"

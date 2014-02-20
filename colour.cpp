@@ -45,7 +45,7 @@ ostream& operator<< (ostream& out, const colour& c)
                             break;
       case colour::white:   out << "white";
                             break;
-      default:              throw runtime_error("jailcur: colour: operator<<(): Invalid colour as parameter");
+      default:              throw invalid_argument("jailcur: colour: operator<<(): Invalid colour as parameter");
                             break;
     }
     return out;
@@ -78,10 +78,10 @@ void operator++ (colour& c)
                             break;
       case colour::white:   c = colour::max;
                             break;
-      case colour::max:     throw runtime_error(
-                "jailcur: colour: operator++(): Attempted to increment colour::max");
-      default:              throw runtime_error(
-                "jailcur: colour: operator++(): Invalid colour as parameter");
+      case colour::max:     throw out_of_range("jailcur::colour::operator++(): "
+                                  "Unable to increment colour::max");
+      default:              throw out_of_range("jailcur::colour::operator++(): "
+                                  "Invalid colour as parameter");
                             break;
     }
 }
@@ -93,8 +93,8 @@ void operator-- (colour& c)
 {
     switch(c)
     {
-      case colour::min:     throw runtime_error(
-                "jailcur: colour: operator--(): Attempted to decrement colour::min");
+      case colour::min:     throw out_of_range("jailcur::colour::operator--(): "
+                                  "Attempted to decrement colour::min");
                             break;
       case colour::red:     c = colour::black;
                             break;
@@ -112,8 +112,8 @@ void operator-- (colour& c)
                             break;
       case colour::max:     c = colour::white;
                             break;
-      default:              throw runtime_error(
-                "jailcur: colour: operator--(): Invalid colour as parameter");
+      default:              throw out_of_range("jailcur::colour::operator--(): "
+                                  "Invalid colour as parameter");
                             break;
     }
 }

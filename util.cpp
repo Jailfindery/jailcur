@@ -6,12 +6,12 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdexcept>
 #include <string>
 
 #include <curses.h>
 #include <menu.h>
 
+#include "jailcur_except.h"
 #include "standard.h"
 #include "util.h"
 
@@ -56,9 +56,9 @@ MENU* util::new_menu(ITEM** item_list)
 void util::add_ch(char c, WINDOW* win, int y, int x)
 {
     int rc = mvwaddch(win, y, x, c);
-    if(rc)
-        throw runtime_error("jailcur::util::add_ch(): "
-                            "Unable to add character to window");
+    if(rc != OK)
+        throw util::window_error("jailcur::util::add_ch(): "
+              "Unable to add character to window", rc);
 }
 
 /* Add a string str to window win at position (y,x). On error,
@@ -67,8 +67,8 @@ void util::add_ch(char c, WINDOW* win, int y, int x)
 void util::add_str(string str, WINDOW* win, int y, int x)
 {
    int rc = mvwaddstr(win, y, x, str.c_str() );
-   if(rc)
-        throw runtime_error("jailcur: Unable to add string to window");
+   if(rc != OK)
+        throw util::window_error("jailcur: Unable to add string to window", rc);
 }
 
 /* Uses curses functions to get the height and width of win and clears win of
@@ -96,8 +96,8 @@ void util::delete_item(ITEM* item)
 {
     int rc = free_item(item);
     if(rc != E_OK)
-        throw runtime_error("jailcur::util::delete_item(): "
-                            "Unable to free menu item. Exited with ");
+        throw util::menu_error("jailcur::util::delete_item(): "
+              "Unable to free menu item.", rc);
 }
 
 /* Frees resources associated with a MENU*. THrows runtime_error on failure.
@@ -105,18 +105,19 @@ void util::delete_item(ITEM* item)
  */
 void util::delete_menu(MENU* menu)
 {
-    if(free_menu(menu) != 0)
-        throw runtime_error("jailcur::util::delete_menu(): "
-                            "Unable to free menu");
+    int rc = free_menu(menu);
+    if(rc != E_OK)
+        throw util::menu_error("jailcur::util::delete_menu(): "
+              "Unable to free menu", rc);
 }
 
 /* Deletes win. Throws runtime_error on error. Wraps delwin() */
 void util::delete_window(WINDOW* win)
 {
     int rc = delwin(win);
-    if(rc)
-        throw runtime_error("jailcur: util::delete_win(): "
-                            "Unable to delete window.");
+    if(rc != OK)
+        throw util::window_error("jailcur: util::delete_win(): "
+              "Unable to delete window.", rc);
 }
 
 /* Draws a border around the perimeter of win. Throw runtime_error on non-zero
@@ -125,9 +126,9 @@ void util::delete_window(WINDOW* win)
 void util::draw_border(WINDOW* win)
 {
     int rc = box(win, ACS_VLINE, ACS_HLINE);
-    if(rc)
-        throw runtime_error("jailcur::util::draw_border():"
-                            "Unable to draw border");
+    if(rc != OK)
+        throw util::window_error("jailcur::util::draw_border():"
+              "Unable to draw border", rc);
 }
 
 /* Draws a centred title on the top row of win. Throws runtime_error on non-zero
@@ -143,9 +144,9 @@ void util::draw_title(WINDOW* win, string str)
 
     string title = ' ' + str + ' ';
     int rc = mvwaddstr(win, 0, offset, title.c_str() );
-    if(rc)
-        throw runtime_error("jailcur::util::draw_title():"
-                            "Unable to add text to window");
+    if(rc != OK)
+        throw util::window_error("jailcur::util::draw_title():"
+              "Unable to add text to window", rc);
 }
 
 /* Writes a menu to its associated sub window. The menu is unposted with
@@ -154,8 +155,10 @@ void util::draw_title(WINDOW* win, string str)
  */
 void util::post_menu(MENU* menu)
 {
-    if(::post_menu(menu) != 0)
-        throw runtime_error("jailcur::util::post_menu(): Unable to post menu");
+    int rc = ::post_menu(menu);
+    if(rc != E_OK)
+        throw util::menu_error("jailcur::util::post_menu(): "
+              "Unable to post menu", rc);
 }
 
 /* Refresh a window on the screen in order to remove overlaps of windows no
@@ -167,15 +170,15 @@ void util::refresh_window(WINDOW* win)
         throw runtime_error("jailcur::util::refresh_win(): "
                             "Passed null window.");
 
-    int rc1 = touchwin(win);
-    if(rc1)
-        throw runtime_error("jailcur::util::refresh_win(): "
-                            "Unable to touch window");
+    int rc = touchwin(win);
+    if(rc != OK)
+        throw util::window_error("jailcur::util::refresh_win(): "
+              "Unable to touch window", rc);
 
-    int rc2 = wrefresh(win);
-    if(rc2)
-        throw runtime_error("jailcur::util::refresh_win(): "
-                            "Unable to refresh window");
+    rc = wrefresh(win);
+    if(rc != OK)
+        throw util::window_error("jailcur::util::refresh_win(): "
+              "Unable to refresh window", rc);
 }
 
 /* Set video attributes of a window (e.g. give colour to a window). Throws
@@ -184,9 +187,9 @@ void util::refresh_window(WINDOW* win)
 void util::set_attribute(WINDOW* win, int attrib)
 {
     int rc = wattrset(win, attrib);
-    if(rc)
-        throw runtime_error("jailcur: util::set_attribute: "
-                            "Unable to set attribute(s)");
+    if(rc != OK)
+        throw util::window_error("jailcur: util::set_attribute: "
+              "Unable to set attribute(s)", rc);
 }
 
 /* Associates a menu with a base window. It acts as a wrapper for set_menu_win()
@@ -194,9 +197,10 @@ void util::set_attribute(WINDOW* win, int attrib)
  */
 void util::set_menu_base(MENU* menu, WINDOW* base)
 {
-    if(set_menu_win(menu, base) != 0)
-        throw runtime_error("jailcur::util::set_menu_base(): "
-                            "Unable to associate menu with base window.");
+    int rc = set_menu_win(menu, base);
+    if(rc != E_OK)
+        throw util::menu_error("jailcur::util::set_menu_base(): "
+              "Unable to associate menu with base window.", rc);
 }
 
 /* Sets the selected entry marker for a menu. It acts as a wrapper for
@@ -204,9 +208,10 @@ void util::set_menu_base(MENU* menu, WINDOW* base)
  */
 void util::set_menu_marker(MENU* menu, const char* mark)
 {
-    if(set_menu_mark(menu, mark) != 0)
-        throw runtime_error("jailcur::util::set_menu_marker(): "
-                            "Unable to set thee menu marker.");
+    int rc = set_menu_mark(menu, mark);
+    if(rc != E_OK)
+        throw util::menu_error("jailcur::util::set_menu_marker(): "
+              "Unable to set thee menu marker.", rc);
 }
 
 /* Sets the colour of selected entries of a menu. It acts as a wrapper for
@@ -214,9 +219,10 @@ void util::set_menu_marker(MENU* menu, const char* mark)
  */
 void util::set_menu_selected_colour(MENU* menu, colour t, colour b)
 {
-    if(set_menu_fore(menu, standard.get_cp(t, b) ) != 0)
-        throw runtime_error("jailcur::util::set_menu_selected_colour(): "
-                            "Unable to set selected entry colours.");
+    int rc = set_menu_fore(menu, standard.get_cp(t, b) );
+    if(rc != E_OK)
+        throw util::menu_error("jailcur::util::set_menu_selected_colour(): "
+              "Unable to set selected entry colours.", rc);
 }
 
 /* Associates a menu with a sub window. It acts as a wrapper for set_menu_win()
@@ -224,9 +230,10 @@ void util::set_menu_selected_colour(MENU* menu, colour t, colour b)
  */
 void util::set_menu_sub_window(MENU* menu, WINDOW* sub)
 {
-    if(set_menu_sub(menu, sub) != 0)
-        throw runtime_error("jailcur::util::set_menu_base(): "
-                            "Unable to associate menu with base window.");
+    int rc = set_menu_sub(menu, sub);
+    if(rc != E_OK)
+        throw util::menu_error("jailcur::util::set_menu_base(): "
+              "Unable to associate menu with base window.", rc);
 }
 
 /* Sets the colour of unselected entries of a menu. It acts as a wrapper for
@@ -234,9 +241,10 @@ void util::set_menu_sub_window(MENU* menu, WINDOW* sub)
  */
 void util::set_menu_unselected_colour(MENU* menu, colour t, colour b)
 {
-    if(set_menu_back(menu, standard.get_cp(t, b) ) != 0)
-        throw runtime_error("jailcur::util::set_menu_unselected_colour(): "
-                            "Unable to set unselected entry colours.");
+    int rc = set_menu_back(menu, standard.get_cp(t, b) );
+    if(rc != E_OK)
+        throw util::menu_error("jailcur::util::set_menu_unselected_colour(): "
+              "Unable to set unselected entry colours.", rc);
 }
 
 /* Erases a menu with its associated sub window. It is the complement function
@@ -245,9 +253,10 @@ void util::set_menu_unselected_colour(MENU* menu, colour t, colour b)
  */
 void util::unpost_menu(MENU* menu)
 {
-    if(::unpost_menu(menu) != 0)
-        throw runtime_error("jailcur::util::unpost_menu(): "
-                            "Unable to unpost a menu.");
+    int rc = ::unpost_menu(menu);
+    if(rc != E_OK)
+        throw util::menu_error("jailcur::util::unpost_menu(): "
+              "Unable to unpost a menu.", rc);
 }
 
 /* Creates a WINDOW* with height h and width w, with the top left corner at

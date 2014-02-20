@@ -1,5 +1,5 @@
 JAILCUR_OBJECTS= obj/basic_cwindow.o obj/basic_message_window.o obj/basic_window.o \
-                 obj/colour.o obj/menu_window.o obj/message_window.o \
+                 obj/colour.o obj/jailcur_except.o obj/menu_window.o obj/message_window.o \
                  obj/progress_window.o obj/render.o obj/standard.o obj/util.o
 JAILCUR_TEST_OBJECTS= obj/jailcur_test.o
 LD_OPTS=-lmenu -lcurses
@@ -21,6 +21,9 @@ obj/basic_window.o: basic_window.cpp
 
 obj/colour.o: colour.cpp
 	g++ $(COMPILER_OPTS) colour.cpp -c -std=c++11 -o obj/colour.o
+
+obj/jailcur_except.o: jailcur_except.cpp
+	g++ $(COMPILER_OPTS) jailcur_except.cpp -c -std=c++11 -o obj/jailcur_except.o
 
 obj/menu_window.o: menu_window.cpp
 	g++ $(COMPILER_OPTS) menu_window.cpp -c -std=c++11 -o obj/menu_window.o
