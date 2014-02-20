@@ -160,12 +160,12 @@ void window_render::pull_top()
  * the on_screen_stack. The WINDOW* are then rendered on the screen. Throws
  * runtime_error if no windows are on the stack.
  */
-void window_render::put_top(window_interface* n_win, int y, int x)
+void window_render::put_top(window_interface& n_win, int y, int x)
 {
     try
     {
-        list<WINDOW*> my_list = n_win->create_window_ptr(y, x);
-        desc_stack.push_back(n_win);
+        list<WINDOW*> my_list = n_win.create_window_ptr(y, x);
+        desc_stack.push_back(&n_win);
         coordinate_stack.push_back(make_pair(y, x) );
 
         while(!my_list.empty() )

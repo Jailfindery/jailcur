@@ -43,7 +43,7 @@ class window_render
     static void refresh_top();
 
     static void pull_top();
-    static void put_top(window_interface* n_win, int y, int x);
+    static void put_top(window_interface& n_win, int y, int x);
 
     static window_interface* get_top() { return desc_stack.back(); }
 

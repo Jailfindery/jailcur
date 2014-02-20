@@ -77,17 +77,17 @@ int main()
         //basic_cwindow my_cwin;
 
         util::get_ch();
-        render.put_top(&my_menu, 15, 15);
+        render.put_top(my_menu, 15, 15);
         util::get_ch();
-        render.put_top(&my_win1, 2, 2);
+        render.put_top(my_win1, 2, 2);
         util::get_ch();
-        render.put_top(&my_win2, 5, 5);
+        render.put_top(my_win2, 5, 5);
         util::get_ch();
-        render.put_top(&my_win4, 11, 11);
+        render.put_top(my_win4, 11, 11);
         util::get_ch();
-        render.put_top(&my_win3, 8, 8);
+        render.put_top(my_win3, 8, 8);
         util::get_ch();
-        render.put_top(&my_p, 4, 4);
+        render.put_top(my_p, 4, 4);
 
         util::get_ch();
         standard.engage_disco_mode();
