@@ -1,5 +1,5 @@
-#ifndef JAILCUR_MENU_WIN_H_INCLUDED
-#define JAILCUR_MENU_WIN_H_INCLUDED
+#ifndef JAILCUR_MENU_WINDOW_H_INCLUDED
+#define JAILCUR_MENU_WINDOW_H_INCLUDED
 
 #include <list>
 #include <string>
@@ -8,7 +8,7 @@
 #include <curses.h>
 #include <menu.h>
 
-#include "basic_cwin.h"
+#include "basic_cwindow.h"
 #include "colour.h"
 #include "data.h"
 #include "standard.h"
@@ -18,7 +18,7 @@ using namespace std;
 namespace jailcur
 {
 
-class menu_window : public basic_cwin
+class menu_window : public basic_cwindow
 {
   public:
     menu_window(string m = "", 
@@ -28,7 +28,7 @@ class menu_window : public basic_cwin
              colour f = colour::black,
              colour b = colour::white,
              colour s = colour::black)
-        : basic_cwin(m, t, h, w, f, b, s),
+        : basic_cwindow(m, t, h, w, f, b, s),
           highlight_bg(colour::red), highlight_text(colour::white),
           item_list(nullptr), menu(nullptr)
     {
@@ -50,7 +50,7 @@ class menu_window : public basic_cwin
     void set_marker(char c) { marker[0] = c; }
     void clear_list() { menu_options.clear(); }
   protected:
-    virtual list<WINDOW*> create_win_ptr(int y, int x);
+    virtual list<WINDOW*> create_window_ptr(int y, int x);
   private:
     char marker[3];
     colour highlight_bg;
@@ -65,5 +65,5 @@ class menu_window : public basic_cwin
 
 }
 
-#endif /* JAILCUR_MENU_WIN_H_INCLUDED */
+#endif /* JAILCUR_MENU_WINDOW_H_INCLUDED */
 

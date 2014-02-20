@@ -11,18 +11,18 @@
 
 /* Meta-header to easily include all necessary headers for jailcur. */
 
-#include "basic_cwin.h"
-#include "basic_message_win.h"
-#include "basic_win.h"
+#include "basic_cwindow.h"
+#include "basic_message_window.h"
+#include "basic_window.h"
 #include "colour.h"
 #include "data.h"
 #include "menu_window.h"
-#include "message_win.h"
-#include "progress_win.h"
+#include "message_window.h"
+#include "progress_window.h"
 #include "render.h"
 #include "standard.h"
 #include "util.h"
-#include "win_interface.h"
+#include "window_interface.h"
 
 #endif /* JAILCUR_JAILCUR_H_INCLUDED */
 

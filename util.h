@@ -32,20 +32,20 @@ void add_str(string str, WINDOW* win, int y, int x);
 void clear_screen(WINDOW* win);
 void delete_item(ITEM* item);
 void delete_menu(MENU* menu);
-void delete_win(WINDOW* win);
+void delete_window(WINDOW* win);
 void draw_border(WINDOW* win);
 void draw_title(WINDOW* win, string str);
 void post_menu(MENU* menu);
-void refresh_win(WINDOW* win);
+void refresh_window(WINDOW* win);
 void set_attribute(WINDOW* win, int attrib);
 void set_menu_base(MENU* menu, WINDOW* base);
 void set_menu_marker(MENU* menu, const char* mark);
 void set_menu_selected_colour(MENU* menu, colour t, colour b);
-void set_menu_sub_win(MENU* menu, WINDOW* sub);
+void set_menu_sub_window(MENU* menu, WINDOW* sub);
 void set_menu_unselected_colour(MENU* menu, colour t, colour b);
 void unpost_menu(MENU* menu);
-WINDOW* new_win_ptr(int h, int w, int y, int x);
-WINDOW* derive_win(WINDOW* b, int h, int w, int y, int x);
+WINDOW* new_window_ptr(int h, int w, int y, int x);
+WINDOW* derive_window(WINDOW* b, int h, int w, int y, int x);
 
 }
 

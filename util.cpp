@@ -111,7 +111,7 @@ void util::delete_menu(MENU* menu)
 }
 
 /* Deletes win. Throws runtime_error on error. Wraps delwin() */
-void util::delete_win(WINDOW* win)
+void util::delete_window(WINDOW* win)
 {
     int rc = delwin(win);
     if(rc)
@@ -161,7 +161,7 @@ void util::post_menu(MENU* menu)
 /* Refresh a window on the screen in order to remove overlaps of windows no
  * longer on the screen among other things. Wraps touchwin() and wrefresh().
  */
-void util::refresh_win(WINDOW* win)
+void util::refresh_window(WINDOW* win)
 {
     if(win == nullptr)
         throw runtime_error("jailcur::util::refresh_win(): "
@@ -222,7 +222,7 @@ void util::set_menu_selected_colour(MENU* menu, colour t, colour b)
 /* Associates a menu with a sub window. It acts as a wrapper for set_menu_win()
  * and throws runtime_error on failure.
  */
-void util::set_menu_sub_win(MENU* menu, WINDOW* sub)
+void util::set_menu_sub_window(MENU* menu, WINDOW* sub)
 {
     if(set_menu_sub(menu, sub) != 0)
         throw runtime_error("jailcur::util::set_menu_base(): "
@@ -254,7 +254,7 @@ void util::unpost_menu(MENU* menu)
  * point (x, y) relative to the top left corner of the screen. Throws runtime_
  * error on error. It acts as a wrapper for newwin().
  */
-WINDOW* util::new_win_ptr(int h, int w, int y, int x)
+WINDOW* util::new_window_ptr(int h, int w, int y, int x)
 {
     WINDOW* win = newwin(h, w, y, x);
     if(win == nullptr)
@@ -266,7 +266,7 @@ WINDOW* util::new_win_ptr(int h, int w, int y, int x)
  * coordinates are relative to the upper left corner of b. Throws runtime_error
  * on error. It acts as a wrapper for derwin().
  */
-WINDOW* util::derive_win(WINDOW* b, int h, int w, int y, int x)
+WINDOW* util::derive_window(WINDOW* b, int h, int w, int y, int x)
 {
     WINDOW* sub = derwin(b, h, w, y, x);
     if(sub == nullptr)

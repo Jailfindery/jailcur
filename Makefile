@@ -1,6 +1,6 @@
-JAILCUR_OBJECTS= obj/basic_cwin.o obj/basic_message_win.o obj/basic_win.o \
-                 obj/colour.o obj/menu_window.o obj/message_win.o \
-                 obj/progress_win.o obj/render.o obj/standard.o obj/util.o
+JAILCUR_OBJECTS= obj/basic_cwindow.o obj/basic_message_window.o obj/basic_window.o \
+                 obj/colour.o obj/menu_window.o obj/message_window.o \
+                 obj/progress_window.o obj/render.o obj/standard.o obj/util.o
 JAILCUR_TEST_OBJECTS= obj/jailcur_test.o
 LD_OPTS=-lmenu -lcurses
 COMPILER_OPTS=-Wall -Werror -Wno-sign-compare
@@ -10,14 +10,14 @@ default: jailcur_test
 jailcur_test: $(JAILCUR_OBJECTS) $(JAILCUR_TEST_OBJECTS)
 	g++ $(COMPILER_OPTS) $(JAILCUR_OBJECTS) $(JAILCUR_TEST_OBJECTS) -o bin/jailcur_test $(LD_OPTS)
 
-obj/basic_cwin.o: basic_cwin.cpp
-	g++ $(COMPILER_OPTS) basic_cwin.cpp -c -std=c++11 -o obj/basic_cwin.o
+obj/basic_cwindow.o: basic_cwindow.cpp
+	g++ $(COMPILER_OPTS) basic_cwindow.cpp -c -std=c++11 -o obj/basic_cwindow.o
 
-obj/basic_message_win.o: basic_message_win.cpp
-	g++ $(COMPILER_OPTS) basic_message_win.cpp -c -std=c++11 -o obj/basic_message_win.o
+obj/basic_message_window.o: basic_message_window.cpp
+	g++ $(COMPILER_OPTS) basic_message_window.cpp -c -std=c++11 -o obj/basic_message_window.o
 
-obj/basic_win.o: basic_win.cpp
-	g++ $(COMPILER_OPTS) basic_win.cpp -c -std=c++11 -o obj/basic_win.o
+obj/basic_window.o: basic_window.cpp
+	g++ $(COMPILER_OPTS) basic_window.cpp -c -std=c++11 -o obj/basic_window.o
 
 obj/colour.o: colour.cpp
 	g++ $(COMPILER_OPTS) colour.cpp -c -std=c++11 -o obj/colour.o
@@ -28,11 +28,11 @@ obj/menu_window.o: menu_window.cpp
 obj/jailcur_test.o: jailcur_test.cpp
 	g++ $(COMPILER_OPTS) jailcur_test.cpp -c -std=c++11 -o obj/jailcur_test.o
 
-obj/message_win.o: message_win.cpp
-	g++ $(COMPILER_OPTS) message_win.cpp -c -std=c++11 -o obj/message_win.o
+obj/message_window.o: message_window.cpp
+	g++ $(COMPILER_OPTS) message_window.cpp -c -std=c++11 -o obj/message_window.o
 
-obj/progress_win.o: progress_win.cpp
-	g++ $(COMPILER_OPTS) progress_win.cpp -c -std=c++11 -o obj/progress_win.o
+obj/progress_window.o: progress_window.cpp
+	g++ $(COMPILER_OPTS) progress_window.cpp -c -std=c++11 -o obj/progress_window.o
 
 obj/render.o: render.cpp
 	g++ $(COMPILER_OPTS) render.cpp -c -std=c++11 -o obj/render.o

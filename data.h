@@ -30,11 +30,11 @@ class abstract_data
 
 /* Concrete version of abstract_data that stores user input from windows. */
 template<typename T>
-class win_data : public abstract_data
+class window_data : public abstract_data
 {
   public:
-    win_data(T x) : input(x) {}
-    virtual ~win_data() {}
+    window_data(T x) : input(x) {}
+    virtual ~window_data() {}
     T get() { return input; }
   private:
     T input;
@@ -49,7 +49,7 @@ class win_data : public abstract_data
 template<typename T>
 T data_cast(abstract_data::ptr& P)
 {
-    win_data<T>* data_P = dynamic_cast<win_data<T>*>(P.get() );
+    window_data<T>* data_P = dynamic_cast<window_data<T>*>(P.get() );
     if(data_P == nullptr)
         throw runtime_error("jailcur::data_cast(): Bad cast");
     return data_P->get();

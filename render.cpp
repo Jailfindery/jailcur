@@ -16,7 +16,7 @@
 #include "render.h"
 #include "standard.h"
 #include "util.h"
-#include "win_interface.h"
+#include "window_interface.h"
 
 using namespace std;
 using namespace jailcur;
@@ -24,7 +24,7 @@ using namespace jailcur;
 /* Static members for render */
 vector<pair<int, int> > window_render::coordinate_stack {};
 vector<WINDOW*> window_render::on_screen_stack {};
-vector<win_interface*> window_render::desc_stack {};
+vector<window_interface*> window_render::desc_stack {};
 
 /* Creation of window_render object */
 window_render render {};
@@ -38,7 +38,7 @@ void window_render::empty()
     {
         while(!on_screen_stack.empty() )
         {
-            util::delete_win(on_screen_stack.back() );
+            util::delete_window(on_screen_stack.back() );
             on_screen_stack.pop_back();
         }
 
@@ -62,7 +62,7 @@ void window_render::rebuild_all()
     catch(...) { throw; }
 }
 
-/* Recreates the WINDOW* objects corresponding with the top win_interface*
+/* Recreates the WINDOW* objects corresponding with the top window_interface*
  * object and refreshes them. Uses coordinate_stack to get the coordinate for
  * the WINDOW*.
  */
@@ -70,17 +70,17 @@ void window_render::rebuild_top()
 {
     try
     {
-        win_interface* top_win = desc_stack.back();
+        window_interface* top_win = desc_stack.back();
         int list_size = top_win->get_list_size();
 
         for(int i = 0; i < list_size; ++i)
         {
-            util::delete_win(on_screen_stack.back() );
+            util::delete_window(on_screen_stack.back() );
             on_screen_stack.pop_back();
         }
 
         pair<int, int> top_coor = coordinate_stack.back();
-        list<WINDOW*> top_list = top_win->create_win_ptr(top_coor.first,
+        list<WINDOW*> top_list = top_win->create_window_ptr(top_coor.first,
                                                          top_coor.second);
         while(!top_list.empty() )
         {
@@ -100,8 +100,9 @@ void window_render::refresh_all()
         refresh_standard();
 
         vector<WINDOW*>::iterator iter;
-        for(iter = on_screen_stack.begin(); iter < on_screen_stack.end(); ++iter)
-            util::refresh_win(*iter);
+        for(iter = on_screen_stack.begin();
+            iter < on_screen_stack.end(); ++iter)
+                util::refresh_window(*iter);
     }
     catch(...) { throw; }
 }
@@ -113,8 +114,8 @@ void window_render::refresh_standard()
 {
     try
     {
-        WINDOW* stdw = standard.create_win_ptr();
-        util::refresh_win(stdw);
+        WINDOW* stdw = standard.create_window_ptr();
+        util::refresh_window(stdw);
     }
     catch(...) { throw; }
 }
@@ -124,7 +125,7 @@ void window_render::refresh_top()
 {
     try
     {
-        util::refresh_win(on_screen_stack.back() );
+        util::refresh_window(on_screen_stack.back() );
     }
     catch(...) { throw; }
 }
@@ -141,7 +142,7 @@ void window_render::pull_top()
             throw runtime_error("jailcur::render::pull_top(): "
                                 "Empty window stack.");
 
-        win_interface* temp = desc_stack.back();
+        window_interface* temp = desc_stack.back();
         desc_stack.pop_back();
         coordinate_stack.pop_back();
 
@@ -159,11 +160,11 @@ void window_render::pull_top()
  * the on_screen_stack. The WINDOW* are then rendered on the screen. Throws
  * runtime_error if no windows are on the stack.
  */
-void window_render::put_top(win_interface* n_win, int y, int x)
+void window_render::put_top(window_interface* n_win, int y, int x)
 {
     try
     {
-        list<WINDOW*> my_list = n_win->create_win_ptr(y, x);
+        list<WINDOW*> my_list = n_win->create_window_ptr(y, x);
         desc_stack.push_back(n_win);
         coordinate_stack.push_back(make_pair(y, x) );
 

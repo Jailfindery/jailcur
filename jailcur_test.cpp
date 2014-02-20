@@ -12,11 +12,11 @@
 #include "jailcur.h"
 
 /*
-#include "basic_message_win.h"
-#include "basic_win.h"
+#include "basic_message_window.h"
+#include "basic_window.h"
 #include "colour.h"
 #include "data.h"
-#include "message_win.h"
+#include "message_window.h"
 #include "render.h"
 #include "standard.h"
 #include "util.h"
@@ -26,23 +26,23 @@ using namespace jailcur;
 
 int main()
 {
-    int choice;     // Required for testing jailcur::menu_win
+    int choice;     // Required for testing jailcur::menu_window
 
     try
     {
         standard.set_title("jailcur Test Program");
         standard.start();
 
-        basic_win my_win1("", 15, 60, colour::magenta, colour::green, colour::magenta);
-        basic_win my_win2("Hello, world!", 15, 60, colour::yellow, colour::black, colour::red);
+        basic_window my_win1("", 15, 60, colour::magenta, colour::green, colour::magenta);
+        basic_window my_win2("Hello, world!", 15, 60, colour::yellow, colour::black, colour::red);
 
-        message_win my_win3("That's alright...");
+        message_window my_win3("That's alright...");
         my_win3.set_title("User-Friendly Message Window");
         my_win3.set_height(15);
         my_win3.set_width(60);
         my_win3.set_message("This is a test message. ;)");
 
-        basic_message_win my_win4;
+        basic_message_window my_win4;
         my_win4.set_title("Message Test");
         my_win4.set_message("Here is a list of things:\n"
                             "\t* Thoughts strewn across your mind.\n"
@@ -67,14 +67,14 @@ int main()
 
         int n = 0;
         int d = 5;
-        progress_win my_p(n, d);
+        progress_window my_p(n, d);
         my_p.set_title("Progress Test");
         my_p.set_height(15);
         my_p.set_width(71);
         my_p.set_message("Press a button to increase progress.");
 
         // Constructor is protected, so an object can not be created.
-        //basic_cwin my_cwin;
+        //basic_cwindow my_cwin;
 
         util::get_ch();
         render.put_top(&my_menu, 15, 15);

@@ -11,31 +11,31 @@
 
 #include <curses.h>
 
-#include "progress_win.h"
+#include "progress_window.h"
 #include "util.h"
 
 using namespace std;
 using namespace jailcur;
 
 /* Tests if whatever the window tracks is complete or not. */
-bool progress_win::is_complete()
+bool progress_window::is_complete()
 {
     if(numerator >= denominator)
         return true;
     return false;
 }
 
-/* Uses basic_message_win::create_win_ptr() to create the window list and
+/* Uses basic_message_window::create_window_ptr() to create the window list and
  * initialize the content. L.back() is the content window. This adds the
  * progress bar with the relevant information.
  */
-list<WINDOW*> progress_win::create_win_ptr(int y, int x)
+list<WINDOW*> progress_window::create_window_ptr(int y, int x)
 {
     list<WINDOW*> L;
 
     try
     {
-        L = basic_message_win::create_win_ptr(y, x);
+        L = basic_message_window::create_window_ptr(y, x);
         WINDOW* content = L.back();
 
         int width = get_width();

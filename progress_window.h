@@ -6,15 +6,15 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef JAILCUR_PROGRESS_WIN_H_INCLUDED
-#define JAILCUR_PROGRESS_WIN_H_INCLUDED
+#ifndef JAILCUR_PROGRESS_WINDOW_H_INCLUDED
+#define JAILCUR_PROGRESS_WINDOW_H_INCLUDED
 
 #include <list>
 #include <string>
 
 #include <curses.h>
 
-#include "basic_message_win.h"
+#include "basic_message_window.h"
 #include "colour.h"
 #include "util.h"
 
@@ -22,10 +22,10 @@ using namespace std;
 
 namespace jailcur {
 
-class progress_win : public basic_message_win
+class progress_window : public basic_message_window
 {
   public:
-    progress_win(int& num,
+    progress_window(int& num,
                  int& den,
                  string m = "",
                  string t = "",
@@ -34,13 +34,13 @@ class progress_win : public basic_message_win
                  colour f = colour::black,
                  colour b = colour::white,
                  colour s = colour::black)
-        : basic_message_win(m, t, h, w, f, b, s),
+        : basic_message_window(m, t, h, w, f, b, s),
           numerator(num), denominator(den)
     {}
     bool is_complete();
 
   protected:
-    virtual list<WINDOW*> create_win_ptr(int y, int x);
+    virtual list<WINDOW*> create_window_ptr(int y, int x);
 
   private:
     int& numerator;
@@ -49,5 +49,5 @@ class progress_win : public basic_message_win
 
 }
 
-#endif /* JAILCUR_PROGRESS_WIN_H_INCLUDED */
+#endif /* JAILCUR_PROGRESS_WINDOW_H_INCLUDED */
 

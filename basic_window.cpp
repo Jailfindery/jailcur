@@ -10,7 +10,7 @@
 
 #include <curses.h>
 
-#include "basic_win.h"
+#include "basic_window.h"
 #include "colour.h"
 #include "data.h"
 #include "standard.h"
@@ -19,18 +19,18 @@
 using namespace std;
 using namespace jailcur;
 
-/* Gets input from the user. For basic_win, this member waits for the user to
- * press a key and then returns a win_data<bool> that has a value of true.
+/* Gets input from the user. For basic_window, this member waits for the user to
+ * press a key and then returns a window_data<bool> that has a value of true.
  *
  * To retrieve data, data::data_cast<bool>() must be used.
  *
  * Because abstract_data::ptr is, in fact, a "smart pointer," it need not be
  * deleted or even stored.
  */
-abstract_data::ptr basic_win::get_input()
+abstract_data::ptr basic_window::get_input()
 {
     util::get_ch();
-    abstract_data::ptr P(new win_data<bool>(true) );
+    abstract_data::ptr P(new window_data<bool>(true) );
     return P;
 }
 
@@ -41,7 +41,7 @@ abstract_data::ptr basic_win::get_input()
  *
  * NB! TODO: Add content to the content window.
  */
-list<WINDOW*> basic_win::create_win_ptr(int y, int x)
+list<WINDOW*> basic_window::create_window_ptr(int y, int x)
 {
     list<WINDOW*> my_list;
     WINDOW* shadow;
@@ -49,9 +49,8 @@ list<WINDOW*> basic_win::create_win_ptr(int y, int x)
 
     try
     {
-
-        shadow = util::new_win_ptr(get_height(), get_width(), y + 1, x + 2);
-        content = util::new_win_ptr(get_height(), get_width(), y, x);
+        shadow = util::new_window_ptr(get_height(), get_width(), y + 1, x + 2);
+        content = util::new_window_ptr(get_height(), get_width(), y, x);
 
         /* Setting windows to the proper colour */
         util::set_attribute(shadow, standard.get_cp(get_shadow_colour(),

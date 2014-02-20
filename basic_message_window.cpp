@@ -10,25 +10,25 @@
 
 #include <curses.h>
 
-#include "basic_message_win.h"
-#include "basic_win.h"
+#include "basic_message_window.h"
+#include "basic_window.h"
 #include "util.h"
 
 using namespace jailcur;
 
-/* Uses basic_win::create_win_ptr() to create the window list and then adds the
+/* Uses basic_window::create_window_ptr() to create the window list and then adds the
  * message to the content window. If the list is L, L.back() is the content
  * window.
  *
  * Newline (\n) and tab (\t) characters are also interpreted correctly.
  */
-list<WINDOW*> basic_message_win::create_win_ptr(int y, int x)
+list<WINDOW*> basic_message_window::create_window_ptr(int y, int x)
 {
     list<WINDOW*> L;
 
     try
     {
-        L = basic_win::create_win_ptr(y, x);
+        L = basic_window::create_window_ptr(y, x);
 
         const int text_height = get_height() - 2;
         const int text_width = get_width() - 2;

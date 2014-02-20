@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "data.h"
-#include "win_interface.h"
+#include "window_interface.h"
 
 using namespace std;
 
@@ -43,17 +43,17 @@ class window_render
     static void refresh_top();
 
     static void pull_top();
-    static void put_top(win_interface* n_win, int y, int x);
+    static void put_top(window_interface* n_win, int y, int x);
 
-    static win_interface* get_top() { return desc_stack.back(); }
+    static window_interface* get_top() { return desc_stack.back(); }
 
   private:
-    /* Stores the coordinates associated with each win_interface* object. The
+    /* Stores the coordinates associated with each window_interface* object. The
      * first member is the y component and the second is the x.
      */
     static vector<pair<int, int> > coordinate_stack;
     static vector<WINDOW*> on_screen_stack;
-    static vector<win_interface*> desc_stack;
+    static vector<window_interface*> desc_stack;
 };
 
 static window_render render;

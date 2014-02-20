@@ -30,7 +30,7 @@ colour standard_screen::text = colour::cyan;
 int standard_screen::maxy = -1;
 int standard_screen::maxx = -1;
 string standard_screen::title {};
-WINDOW* standard_screen::standard_win = nullptr;
+WINDOW* standard_screen::standard_window = nullptr;
 
 /* Creation of centralized standard screen object */
 standard_screen standard {};
@@ -99,24 +99,24 @@ void standard_screen::engage_disco_mode()
  */
 void standard_screen::start()
 {
-    standard_win = initscr();   /* Start curses environment.            */
-    if(standard_win == nullptr)
+    standard_window = initscr();   /* Start curses environment.            */
+    if(standard_window == nullptr)
         throw runtime_error("jailcur::standard::start():"
                             "Unable to start jailcur");
     started = true;
 
-    timeout(-1);                /* Use blocking when reading input.     */
-    start_color();              /* Enables use of colour.               */
-    cbreak();                   /* Does not process special characters? */
-    noecho();                   /* Typed characters do not appear.      */
-    keypad(standard_win, true); /* Enables getting arrow key presses.   */
-    curs_set(0);                /* Disables the cursor.                 */
+    timeout(-1);                   /* Use blocking when reading input.     */
+    start_color();                 /* Enables use of colour.               */
+    cbreak();                      /* Does not process special characters? */
+    noecho();                      /* Typed characters do not appear.      */
+    keypad(standard_window, true); /* Enables getting arrow key presses.   */
+    curs_set(0);                   /* Disables the cursor.                 */
 
     /* Set x and y dimensions of screen.
      * TODO: Allow for maximum dimensions to be changed throughout program.
      *       Also, error checking?
      */
-    getmaxyx(standard_win, maxy, maxx); 
+    getmaxyx(standard_window, maxy, maxx); 
 
     /* TODO: Configure cp's on demand. */
     init_cp_matrix();           /* Initializes colour all colour pairs. */
@@ -155,11 +155,11 @@ void standard_screen::init_cp_matrix()
         }
 }
 
-WINDOW* standard_screen::create_win_ptr()
+WINDOW* standard_screen::create_window_ptr()
 {
-    util::set_attribute(standard_win, get_cp(text, bg) | A_BOLD );
-    util::clear_screen(standard_win);
-    util::add_str(title, standard_win, 0, 0);
-    return standard_win;
+    util::set_attribute(standard_window, get_cp(text, bg) | A_BOLD );
+    util::clear_screen(standard_window);
+    util::add_str(title, standard_window, 0, 0);
+    return standard_window;
 }
 

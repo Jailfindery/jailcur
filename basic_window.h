@@ -6,8 +6,8 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef JAILCUR_BASIC_WIN_H_INCLUDED
-#define JAILCUR_BASIC_WIN_H_INCLUDED
+#ifndef JAILCUR_BASIC_WINDOW_H_INCLUDED
+#define JAILCUR_BASIC_WINDOW_H_INCLUDED
 
 #include <list>
 #include <string>
@@ -18,19 +18,19 @@
 #include "data.h"
 #include "standard.h"
 
-#include "win_interface.h"
+#include "window_interface.h"
 
 namespace jailcur
 {
 
 class render;   /* Forward declaration */
 
-class basic_win : public win_interface
+class basic_window : public window_interface
 {
   friend class render;
 
   public:
-    basic_win(string t = "",
+    basic_window(string t = "",
               int h = standard.get_maxy() - 4,
               int w = standard.get_maxx() - 4,
               colour f = colour::black,
@@ -55,7 +55,7 @@ class basic_win : public win_interface
     void set_width(int w) { width = w; }
 
   protected:
-    virtual list<WINDOW*> create_win_ptr(int y, int x);
+    virtual list<WINDOW*> create_window_ptr(int y, int x);
 
   private:
     colour bg_colour, shadow_colour, text_colour;
@@ -68,5 +68,5 @@ class basic_win : public win_interface
 
 }
 
-#endif /* JAILCUR_BASIC_WIN_H_INCLUDED */
+#endif /* JAILCUR_BASIC_WINDOW_H_INCLUDED */
 

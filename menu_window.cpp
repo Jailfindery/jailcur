@@ -19,17 +19,17 @@ menu_window::~menu_window()
     catch(...) { throw; }    // Rethrow exceptions
 }
 
-/* Use basic_cwin::create_win_ptr() to create the window list and initialize
+/* Use basic_cwindow::create_window_ptr() to create the window list and initialize
  * the windows. If the item list or menu is non-null, they are deleted. The menu
  * associated with the window and sub window, allowing it to be displayed.
  */
-list<WINDOW*> menu_window::create_win_ptr(int y, int x)
+list<WINDOW*> menu_window::create_window_ptr(int y, int x)
 {
     list<WINDOW*> L;
 
     try
     {
-        L = basic_cwin::create_win_ptr(y, x);
+        L = basic_cwindow::create_window_ptr(y, x);
 
         // In order to edit the windows, they must be removed from the list.
         WINDOW* sub_window = L.back();
@@ -48,7 +48,7 @@ list<WINDOW*> menu_window::create_win_ptr(int y, int x)
         // Create and configure menu
         menu = util::new_menu(item_list);
         util::set_menu_base(menu, content_window);
-        util::set_menu_sub_win(menu, sub_window);
+        util::set_menu_sub_window(menu, sub_window);
         util::set_menu_selected_colour(menu, highlight_text, highlight_bg);
         util::set_menu_unselected_colour(menu, get_text_colour(),
                                          get_bg_colour() );
@@ -99,11 +99,11 @@ abstract_data::ptr menu_window::get_input()
         }
 
         /* Wrapping data in polymorphic type */
-        win_data<int>* D = new win_data<int>(choice);
+        window_data<int>* D = new window_data<int>(choice);
         P = abstract_data::ptr(dynamic_cast<abstract_data*>(D) );
         if(P.get() == nullptr)
             throw runtime_error("jailcur::menu_window::get_input(): "
-                                "Bad cast from win_data<int>* to abstract_data*");
+                                "Bad cast from window_data<int>* to abstract_data*");
     }
     catch(...) { throw; } // Rethrow exception
 

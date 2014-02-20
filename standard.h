@@ -68,9 +68,9 @@ class standard_screen
 
     static string title;
 
-    static WINDOW* standard_win;
+    static WINDOW* standard_window;
 
-    static WINDOW* create_win_ptr();
+    static WINDOW* create_window_ptr();
 };
 
 static standard_screen standard;
