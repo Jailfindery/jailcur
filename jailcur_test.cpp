@@ -123,8 +123,7 @@ int main()
     catch(util::error& e)
     {
         standard.stop();
-        cout << "Caught an exception of type jailcur::util::window_error"
-                << endl
+        cout << "Caught an exception of type jailcur::util::error" << endl
              << "what(): " << e.what() << endl
              << "Error code: " << e.get_error_code() << " (" << e.what_error()
                 << ")" << endl;
