@@ -35,12 +35,13 @@ class standard_screen
 
     static int get_cp(colour f, colour b);
 
-    /* TODO: Should get_max*() check if jailcur has been started? */
-    static int get_maxx() { return maxx; }
-    static int get_maxy() { return maxy; }
-    /* Note: get_maxyx() is so named because it is similar to what the
-     * equilivalent curses function is named.
-     */
+    /* Below returns -1 if not started. */
+    static int get_height() { return maxx; }
+    static int get_width() { return maxy; }
+
+    /* FIXME: Depreciated, but kept for backwards compatibility */
+    static int get_maxx() { return get_height(); }
+    static int get_maxy() { return get_width(); }
 
     static colour get_bg_colour() { return bg; }
     static colour get_text_colour() { return text; }
