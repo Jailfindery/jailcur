@@ -1,0 +1,106 @@
+.TH JAILCUR 3JAILCUR "February 2014" "jailcur" "jailcur User Manual"
+.SH NAME
+.BR "jailcur" " \- object-oriented wrapper for curses
+.SH SYNOPSIS
+.B #include <jailcur.h>
+
+.SH DESCRIPTION
+The \fBjailcur\fR library provides an object-oriented TUI interface framework.
+It is a wrapper for \fBcurses\fR, the CRT screen handling and optimization
+package. Note that as \fBncurses\fR is compatable with \fBcurses\fR, this
+library will work with \fBncurses\fR as well (see the \fBPORTABILITY\fR section
+of \fBncurses\fR(3NCURSES) for more information).
+.PP
+\fBjailcur\fR is designed around the idea of windows being the atomic element of
+a user interface, but attempts to not be uncustomizable. Features that are not
+implemented can be added by developing new class through inheritiance.
+.PP
+A program using this library must be linked with the \fB\-ljailcur\fR linking
+option. Such a program does not need to be linked with \fBcurses\fR or
+\fBmenu\fR libraries.
+
+.SS Namespaces
+.TP
+\fBjailcur\fR
+Contains all elements of the library, including subsequent namespaces. For this
+reason, it is recommended to add \fBusing namespace jailcur;\fR to one's
+program.
+.TP
+\fBjailcur::util\fR
+Contains all functions that act as an exception-enabled wrapper for \fBcurses\fR
+functions. See \fButil\fR(3JAILCUR) for more information.
+.TP
+\fBjailcur::data\fR
+Contains classes for retrieving user input from windows. See
+\fBdata\fR(3JAILCUR) for more information.
+
+.SS Windows
+.TP
+\fBclass jailcur::basic_cwindow;\fR
+An abstract class that contains a sub window within another window. See
+\fBbasic_cwindow\fR(3JAILCUR).
+.TP
+\fBclass jailcur::basic_message_window;\fR
+A primitive window with a message. See \fBbasic_message_window\fR(3JAILCUR).
+.TP
+\fBclass jailcur::basic_window;\fR
+A primitive window with a title and border. See \fBbasic_window\fR(3JAILCUR).
+.TP
+\fBclass jailcur::menu_window;\fR
+A window containing a menu. See \fBmenu_window\fR(3JAILCUR).
+.TP
+\fBclass jailcur::message_window;\fR
+A window with a message and a pseudo-button to promote user-friendliness. See
+\fBmessage_window\fR(3JAILCUR).
+.TP
+\fBclass jailcur::progress_window;\fR
+A window with a progress bar. See \fBprogress_window\fR(3JAILCUR).
+.TP
+\fBclass jailcur::window_interface;\fR
+An abstract class that specifies member functions common to all window objects.
+See \fBwindow_interface\fR(3JAILCUR).
+
+.SS Standard Screen
+The standard screen is the main window that is the background in \fBjailcur\fR.
+It is simply used to set the background colour and display the program name. It
+is called \fBjailcur::standard\fR. See \fBstandard\fR(3JAILCUR).
+
+.SS Window Render
+The window render controls the display of windows on the display. It is
+stack\-based, so it allows for window overlapping. It is called
+\fBjailcur::render\fR. See \fBrender\fR(3JAILCUR).
+
+.SS Utilities
+.TP
+\fBint jailcur::util::get_ch();\fR
+Gets a single character as input from the user and returns its integer
+representation of it. This function is useful for a "Press any key to continue"
+event. See \fBget_ch\fR(3JAILCUR).
+
+.SS Exceptions
+.TP
+\fBclass jailcur::util::general_error;\fR
+Signals a generic exception. See \fBgeneral_error\fR(3JAILCUR).
+.TP
+\fBclass jailcur::util::window_error;\fR
+Signals an error with a curses routine concerning windows and stores the error
+code. See \fBwindow_error\fR(3JAILCUR).
+.TP
+\fBclass jailcur::util::menu_error;\fR
+Signals an error with a curses routine concerning menus and stores the error
+code. See \fBmenu_error\fR(3JAILCUR).
+
+.SH BUGS
+Bugs can be reported at the project's bug tracking page at
+<https://github.com/Jailfindery/jailcur/issues>.
+
+.SH LICENSE
+This library is licensed under the GNU General Public License version 3. You
+should have received a copy of it along with this program.  If not, see
+<http://www.gnu.org/licenses/>.
+
+.SH AUTHOR
+Written by Josh Schell <joshua.g.schell@gmail.com>.
+
+.SH SEE ALSO
+.BR "exceptions" "(3JAILCUR), " "render" "(3JAILCUR), " "standard" "(3JAILCUR), " "window" "(3JAILCUR)"
