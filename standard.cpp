@@ -155,7 +155,7 @@ void standard_screen::init_cp_matrix()
         }
 }
 
-WINDOW* standard_screen::create_window_ptr()
+WINDOW* standard_screen::create_window_list()
 {
     util::set_attribute(standard_window, get_cp(text, bg) | A_BOLD );
     util::clear_screen(standard_window);

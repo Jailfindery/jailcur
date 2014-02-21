@@ -80,7 +80,7 @@ void window_render::rebuild_top()
         }
 
         pair<int, int> top_coor = coordinate_stack.back();
-        list<WINDOW*> top_list = top_win->create_window_ptr(top_coor.first,
+        list<WINDOW*> top_list = top_win->create_window_list(top_coor.first,
                                                          top_coor.second);
         while(!top_list.empty() )
         {
@@ -114,7 +114,7 @@ void window_render::refresh_standard()
 {
     try
     {
-        WINDOW* stdw = standard.create_window_ptr();
+        WINDOW* stdw = standard.create_window_list();
         util::refresh_window(stdw);
     }
     catch(...) { throw; }
@@ -164,7 +164,7 @@ void window_render::put_top(window_interface& n_win, int y, int x)
 {
     try
     {
-        list<WINDOW*> my_list = n_win.create_window_ptr(y, x);
+        list<WINDOW*> my_list = n_win.create_window_list(y, x);
         desc_stack.push_back(&n_win);
         coordinate_stack.push_back(make_pair(y, x) );
 

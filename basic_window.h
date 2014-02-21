@@ -55,7 +55,7 @@ class basic_window : public window_interface
     void set_width(int w) { width = w; }
 
   protected:
-    virtual list<WINDOW*> create_window_ptr(int y, int x);
+    virtual list<WINDOW*> create_window_list(int y, int x);
 
   private:
     colour bg_colour, shadow_colour, text_colour;

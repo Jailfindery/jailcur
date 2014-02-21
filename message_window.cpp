@@ -17,15 +17,15 @@ using namespace jailcur;
 
 /* Adds a button to the bottom centre of the content window. To do this, the
  * line above the button must be cleared of any text placed by basic_message_
- * window::create_window_ptr().
+ * window::create_window_list().
  */
-list<WINDOW*> message_window::create_window_ptr(int y, int x)
+list<WINDOW*> message_window::create_window_list(int y, int x)
 {
     list<WINDOW*> L;
 
     try
     {
-        L = basic_message_window::create_window_ptr(y, x);
+        L = basic_message_window::create_window_list(y, x);
         WINDOW* content_win = L.back();
 
         for(int y = get_height() - 3, x = 1; x < get_width() - 1; ++x)

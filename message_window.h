@@ -48,7 +48,7 @@ class message_window : public basic_message_window
     }
 
   protected:
-    virtual list<WINDOW*> create_window_ptr(int y, int x);
+    virtual list<WINDOW*> create_window_list(int y, int x);
 
   private:
     string button_text;

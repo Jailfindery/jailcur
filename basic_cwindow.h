@@ -35,7 +35,7 @@ class basic_cwindow : public basic_message_window
                   colour s = colour::black)
         : basic_message_window(m, t, h, w, f, b, s)
     {}
-    virtual list<WINDOW*> create_window_ptr(int y, int x);
+    virtual list<WINDOW*> create_window_list(int y, int x);
 
   private:
     virtual const int get_list_size() { return 3; }

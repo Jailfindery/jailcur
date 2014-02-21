@@ -41,7 +41,7 @@ class basic_message_window : public basic_window
     void set_message(string str) { message = str; }
 
   protected:
-    virtual list<WINDOW*> create_window_ptr(int y, int x);
+    virtual list<WINDOW*> create_window_list(int y, int x);
 
   private:
     string message;

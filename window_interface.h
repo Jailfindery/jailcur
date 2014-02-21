@@ -35,7 +35,7 @@ class window_interface
     window_interface() {}
 
   protected:
-    virtual list<WINDOW*> create_window_ptr(int y, int x) = 0;
+    virtual list<WINDOW*> create_window_list(int y, int x) = 0;
 
   private:
     /* Returns the number of elements returned from create_win_ptr(). */

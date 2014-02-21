@@ -27,17 +27,17 @@ menu_window::~menu_window()
     catch(...) { throw; }    // Rethrow exceptions
 }
 
-/* Use basic_cwindow::create_window_ptr() to create the window list and initialize
+/* Use basic_cwindow::create_window_list() to create the window list and initialize
  * the windows. If the item list or menu is non-null, they are deleted. The menu
  * associated with the window and sub window, allowing it to be displayed.
  */
-list<WINDOW*> menu_window::create_window_ptr(int y, int x)
+list<WINDOW*> menu_window::create_window_list(int y, int x)
 {
     list<WINDOW*> L;
 
     try
     {
-        L = basic_cwindow::create_window_ptr(y, x);
+        L = basic_cwindow::create_window_list(y, x);
 
         // In order to edit the windows, they must be removed from the list.
         WINDOW* sub_window = L.back();

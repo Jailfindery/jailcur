@@ -70,7 +70,7 @@ class standard_screen
 
     static WINDOW* standard_window;
 
-    static WINDOW* create_window_ptr();
+    static WINDOW* create_window_list();
 };
 
 static standard_screen standard;

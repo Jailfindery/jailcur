@@ -40,7 +40,7 @@ class progress_window : public basic_message_window
     bool is_complete();
 
   protected:
-    virtual list<WINDOW*> create_window_ptr(int y, int x);
+    virtual list<WINDOW*> create_window_list(int y, int x);
 
   private:
     int& numerator;

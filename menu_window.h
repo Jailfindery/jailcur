@@ -58,7 +58,7 @@ class menu_window : public basic_cwindow
     void set_marker(char c) { marker[0] = c; }
     void clear_list() { menu_options.clear(); }
   protected:
-    virtual list<WINDOW*> create_window_ptr(int y, int x);
+    virtual list<WINDOW*> create_window_list(int y, int x);
   private:
     char marker[3];
     colour highlight_bg;

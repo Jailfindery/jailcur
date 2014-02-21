@@ -25,17 +25,17 @@ bool progress_window::is_complete()
     return false;
 }
 
-/* Uses basic_message_window::create_window_ptr() to create the window list and
+/* Uses basic_message_window::create_window_list() to create the window list and
  * initialize the content. L.back() is the content window. This adds the
  * progress bar with the relevant information.
  */
-list<WINDOW*> progress_window::create_window_ptr(int y, int x)
+list<WINDOW*> progress_window::create_window_list(int y, int x)
 {
     list<WINDOW*> L;
 
     try
     {
-        L = basic_message_window::create_window_ptr(y, x);
+        L = basic_message_window::create_window_list(y, x);
         WINDOW* content = L.back();
 
         int width = get_width();

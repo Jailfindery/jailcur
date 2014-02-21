@@ -41,7 +41,7 @@ abstract_data::ptr basic_window::get_input()
  *
  * NB! TODO: Add content to the content window.
  */
-list<WINDOW*> basic_window::create_window_ptr(int y, int x)
+list<WINDOW*> basic_window::create_window_list(int y, int x)
 {
     list<WINDOW*> my_list;
     WINDOW* shadow;
