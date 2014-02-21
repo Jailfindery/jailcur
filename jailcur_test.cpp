@@ -120,7 +120,7 @@ int main()
 
         standard.stop();
     }
-    catch(util::error& e)
+    catch(util::general_error& e)
     {
         standard.stop();
         cout << "Caught an exception of type jailcur::util::error" << endl
