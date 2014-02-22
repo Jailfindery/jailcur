@@ -1,0 +1,85 @@
+.TH BASIC_WINDOW 3JAILCUR "February 2014" "jailcur" "jailcur User Manual"
+.SH NAME
+.BR "basic_window" " \- primitive \fBjailcur\fR window with border and title"
+
+.SH SYNOPSIS
+.B #include <jailcur.h>
+.sp
+.B class jailcur::basic_window;
+
+.SH DESCRIPTION
+\fBjailcur::basic_window\fR is the most primitive window available in
+\fBjailcur\fR. It features a title, border, and setable text, background, and
+shadow colours. It is derived from \fBjailcur::window_interface\fR.
+
+.SH CONSTRUCTION
+\fB
+basic_window::basic_window(std::string \fItitle\fR = "",\fB
+.in
+     int \fIheight\fR = standard.get_height() - 4,\fB
+.in
+     int \fIwidth\fR = standard.get_width() - 4,\fB
+.in
+     jailcur::colour \fItext\fR = jailcur::colour::black,\fB
+.in
+     jailcur::colour \fIbg\fR = jailcur::colour::white,\fB
+.in
+     jailcur::colour \fIshadow\fR = jailcur::colour::black\fB);
+\fR
+.sp
+All constructor parameters have default values that do not need to be specified.
+Because there are many parameters, it is recommended to use the default values
+then use setters to create the desired result. The default height and
+width are appropriate for a fullscreen window with some padding.
+
+.SH INTERFACE
+.TP
+\fBbasic_window\fR inherits the member functions of \
+\fBjailcur::window_interface\fR. See \fBwindow_interface\fR(3JAILCUR) for more \
+information.
+.PP
+\fBjailcur::colour get_bg_colour();\fR
+.br
+\fBjailcur::colour get_shadow_colour();\fR
+.br
+\fBjailcur::colour get_text_colour();\fR
+.br
+\fBvoid set_bg_colour(jailcur::colour \fIc\fB);\fR
+.br
+\fBvoid set_shadow_colour(jailcur::colour \fIc\fB);\fR
+.br
+\fBvoid set_text_colour(jailcur::colour \fIc\fB);\fR
+.in
+Gets and set the background, shadow, and text colours of the window,
+respectively.
+.PP
+\fBstd::string get_title();\fR
+.br
+\fBvoid set_title(std::string \fIstr\fb);\fR
+.in
+Gets and sets the title, respectively.
+.PP
+\fBint get_height();\fR
+.br
+\fBint get_width();\fR
+.br
+\fBvoid set_height(int \fIh\fB);\fR
+.br
+\fBvoid set_width(int \fIh\fB);\fR
+.in
+Gets and sets the height and width of the window, respectively;
+
+.SH BUGS
+Bugs can be reported at the project's bug tracking page at
+<https://github.com/Jailfindery/jailcur/issues>.
+
+.SH LICENSE
+This library is licensed under the GNU General Public License version 3. You 
+should have received a copy of it along with this program.  If not, see 
+<http://www.gnu.org/licenses/>.
+
+.SH AUTHOR
+Written by Josh Schell <joshua.g.schell@gmail.com>.
+
+.SH SEE ALSO
+\fBcolour\fR(3JAILCUR), \fBwindow_interface\fR(3JAILCUR)

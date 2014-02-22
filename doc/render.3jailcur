@@ -1,0 +1,74 @@
+.TH RENDER 3JAILCUR "February 2014" "jailcur" "jailcur User Manual"
+.SH NAME
+.BR "render" " \- window display manager for \fBjailcur\fR
+
+.SH SYNOPSIS
+.B #include <jailcur.h>
+.sp
+.B static jailcur::window_render jailcur::render;
+
+.SH DESCRIPTION
+\fBjailcur::render\fR controls the display of windows. It uses a stack-based
+mechanism which allows windows to be overlapped.
+
+.SH INTERFACE
+.TP
+\fBjailcur::abstract_data::ptr get_top_input();\fR
+Gets input from the window at the top of the stack. It returns a special,
+polymorphic type whose data can be retrieved with \fBdata_cast\fR (See
+\fBdata\fR(3JAILCUR) ). Note that this does not remove the top window from the
+stack, so one must call \fBpull_top\fR after getting input.
+.TP
+\fBint size();\fR
+Returns the number of windows currently on the stack.
+.TP
+\fBvoid make_empty();\fR
+Removes all windows from the render stack.
+.TP
+\fBvoid pull_top();\fR
+Removes the top window from the render stack.
+.TP
+\fBvoid put_top(jailcur::window_interface& \fInew_window\fB, int \fIy\fB, int \fIx\fB);\fR
+Puts the window \fInew_window\fR on the render stack. The \fIx\fR and \fIy\fR
+values specify where on the screen the window should be rendered relative to the
+top left-hand corner of the screen.
+.TP
+\fBvoid rebuild_all();\fR
+Re-renders all windows on the render stack with any new changes in window
+objects. 
+.TP
+\fBvoid rebuild_top();\fR
+Re-renders the top window on the render stack with any new changes in the
+window object.
+.TP
+\fBvoid refresh_all();\fR
+Re-renders all windows on the render stack. In contrast to \fBrebuild_all\fR,
+changes to window objects are not applied.
+.TP
+\fBvoid refresh_standard();\fR
+Refreshes \fBjailcur::standard\fR. Note that, because alterations to
+\fBstandard\fR take place immediately, this function takes any changes into
+account.
+.TP
+\fBvoid refresh_all();\fR
+Re-renders the top window on the render stack. In contrast to \fBrebuild_top\fR,
+changes to window objects are not applied.
+.TP
+\fBjailcur::window_interface* get_top();\fR
+Returns a pointer to the window on the top of the render stack.
+
+.SH BUGS
+Bugs can be reported at the project's bug tracking page at
+<https://github.com/Jailfindery/jailcur/issues>.
+
+.SH LICENSE
+This library is licensed under the GNU General Public License version 3. You 
+should have received a copy of it along with this program.  If not, see 
+<http://www.gnu.org/licenses/>.
+
+.SH AUTHOR
+Written by Josh Schell <joshua.g.schell@gmail.com>.
+
+.SH SEE ALSO
+\fBstandard\fR(3JAILCUR),
+\fBwindow_interface\fR(3JAILCUR)

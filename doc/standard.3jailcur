@@ -1,0 +1,72 @@
+.TH STANDARD 3JAILCUR "February 2014" "jailcur" "jailcur User Manual"
+.SH NAME
+.BR "standard" " \- main window for " "\fBjailcur\fR"
+
+.SH SYNOPSIS
+.B #include <jailcur.h>
+.sp
+.B static jailcur::standard_screen jailcur::standard;
+
+.SH DESCRIPTION
+\fBjailcur::standard\fR is a window that has the same dimensions as the terminal
+screen. It functions as a backdrop for a user interface and displays the
+program name. It also contains member functions to start and stop \fBjailcur\fR.
+
+.SH INTERFACE
+.TP
+\fBbool is_started();\fR
+Returns \fBtrue\fR if \fBjailcur\fR has been started; \fBfalse\fR otherwise.
+.TP
+\fBint get_cp(jailcur::colour \fIf\fB, jailcur::colour \fIb\fB);\fR
+Returns a video attribute with text colour \fIf\fR and background colour \fIb\fR
+that can be used with \fButil::set_attribute\fR.  Not to be used in higher-level
+\fBjailcur\fR programming.
+.PP
+\fBint get_height();\fR
+.br
+\fBint get_width();\fR
+.in
+Returns the height and width of the display, respectively. Returns -2 if
+\fBjailcur\fR is not started.
+.PP
+\fBjailcur::colour get_bg_colour();\fR
+.br
+\fBjailcur::colour get_text_colour();\fR
+.br
+\fBvoid set_bg_colour(jailcur::colour \fIc\fB);\fR
+.br
+\fBvoid set_text_colour(jailcur::colour \fIc\fB);\fR
+.in
+Gets and sets the colour of the background and text of \fBstandard\fR, respectively.
+.PP
+\fBstd::string get_title();\fR
+.br
+\fBvoid set_title(std::string \fIstr\fB);\fR
+.in
+Gets and sets the text displayed on \fBstandard\fR. The text is typically set to
+the name of the program.
+.TP
+\fBvoid engage_disco_mode();\fR
+To engage disco mode is to have a less boring life.
+.PP
+\fBvoid start();\fR
+.br
+\fBvoid stop();\fR
+.in
+Starts and stops \fBjailcur\fR, respectively.
+
+.SH BUGS
+Bugs can be reported at the project's bug tracking page at
+<https://github.com/Jailfindery/jailcur/issues>.
+
+.SH LICENSE
+This library is licensed under the GNU General Public License version 3. You 
+should have received a copy of it along with this program.  If not, see 
+<http://www.gnu.org/licenses/>.
+
+.SH AUTHOR
+Written by Josh Schell <joshua.g.schell@gmail.com>.
+
+.SH SEE ALSO
+\fBcolour\fR(3JAILCUR),
+\fBjailcur\fR(3JAILCUR)

@@ -1,0 +1,63 @@
+.TH WINDOW 3JAILCUR "February 2014" "jailcur" "jailcur User Manual"
+.SH NAME
+.BR "jailcur Windows " "\- fundamental interface element of \fBjailcur\fR"
+
+.SH SYNOPSIS
+.B #include <jailcur.h>
+.sp
+.BI "class " "jailcur::basic_cwindow" ";"
+.br
+.BI "class " "jailcur::window_interface" ";"
+.sp
+.B class jailcur::basic_message_window;
+.br
+.B class jailcur::basic_window;
+.br
+.B class jailcur::menu_window;
+.br
+.B class jailcur::message_window;
+.br
+.B class jailcur::progress_window;
+
+.SH DESCRIPTION
+Windows are the basic element of the \fBjailcur\fR framework. They are designed
+to be flexible and easy to build upon via inheritance.
+
+.SS Abstract Window Classes
+The abstract classes \fIjailcur::basic_cwindow\fR and
+\fIjailcur::window_interface\fR exist to act as building blocks for more complex
+window classes. \fIwindow_interface\fR is the class that all other windows are
+derived from, which provides polymorphic behaviour. When creating new window
+classes, they must be derived from \fIwindow_interface\fR in order to function
+with the \fBrender\fR. See \fBwindow_interface\fR(3JAILCUR) for more
+information.
+.PP
+\fIjailcur::basic_cwindow\fR contains a sub window that can be used to store
+additional information. For example, the menu of \fBjailcur::menu_window\fR is
+contained within this sub window. \fIbasic_cwindow\fR is intended to be built
+upon through user-defined, derived classes. However, the procedure to do this is
+beyond the scope of this manpage. See \fBbasic_cwindow\fR(3JAILCUR) for more
+information.
+
+.SS Concrete Window Classes
+The non-abstract window classes are designed to be used to construct a
+functional user interface. Note that these classes may be derived from, if
+desired. See the appropriate manpages for more information. 
+
+.SH BUGS
+Bugs can be reported at the project's bug tracking page at
+<https://github.com/Jailfindery/jailcur/issues>.
+
+.SH LICENSE
+This library is licensed under the GNU General Public License version 3. You 
+should have received a copy of it along with this program.  If not, see 
+<http://www.gnu.org/licenses/>.
+
+.SH AUTHOR
+Written by Josh Schell <joshua.g.schell@gmail.com>.
+
+.SH SEE ALSO
+\fBbasic_cwindow\fR(3JAILCUR), \fBbasic_message_window\fR(3JAILCUR),
+\fBbasic_window\fR(3JAILCUR), \fBmenu_window\fR(3JAILCUR),
+\fBmessage_window\fR(3JAILCUR), \fBprogress_window\fR(3JAILCUR),
+\fBwindow_interface\fR(3JAILCUR)

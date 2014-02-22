@@ -1,6 +1,6 @@
 .TH JAILCUR 3JAILCUR "February 2014" "jailcur" "jailcur User Manual"
 .SH NAME
-.BR "jailcur" " \- object-oriented wrapper for curses
+.BR "jailcur" " \- object-oriented wrapper for curses"
 .SH SYNOPSIS
 .B #include <jailcur.h>
 
