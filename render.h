@@ -33,7 +33,10 @@ class window_render
 
     static int size() { return desc_stack.size(); }
 
-    static void empty();
+    static void make_empty();
+
+    static void pull_top();
+    static void put_top(window_interface& n_win, int y, int x);
 
     static void rebuild_all();
     static void rebuild_top();
@@ -41,9 +44,6 @@ class window_render
     static void refresh_all();
     static void refresh_standard();
     static void refresh_top();
-
-    static void pull_top();
-    static void put_top(window_interface& n_win, int y, int x);
 
     static window_interface* get_top() { return desc_stack.back(); }
 

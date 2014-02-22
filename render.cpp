@@ -32,7 +32,7 @@ window_render render {};
 /* Empties both the desc_stack and on_screen_stack objects, and deletes all
  * WINDOW*.
  */
-void window_render::empty()
+void window_render::make_empty()
 {
     try
     {
