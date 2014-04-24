@@ -10,9 +10,10 @@
 
 #include <curses.h>
 
+#include <boost/any.hpp>
+
 #include "basic_window.h"
 #include "colour.h"
-#include "data.h"
 #include "standard.h"
 #include "util.h"
 
@@ -20,26 +21,21 @@ using namespace std;
 using namespace jailcur;
 
 /* Gets input from the user. For basic_window, this member waits for the user to
- * press a key and then returns a window_data<bool> that has a value of true.
+ * press a key and then returns a boost::any that has a value of true.
  *
- * To retrieve data, data::data_cast<bool>() must be used.
- *
- * Because abstract_data::ptr is, in fact, a "smart pointer," it need not be
- * deleted or even stored.
+ * To retrieve data, boost::any_cast() must be used.
  */
-abstract_data::ptr basic_window::get_input()
+boost::any basic_window::get_input()
 {
     util::get_ch();
-    abstract_data::ptr P(new window_data<bool>(true) );
-    return P;
+    boost::any A(true);
+    return A;
 }
 
 /* Creates WINDOW* objects in a list with the top left corner of the content
  * window at point (x, y) relative to the top left corner of the screen. The
  * list contains the content and shadow window, in that order (i.e. with shadow
  * window added last) so render can render them in the proper order.
- *
- * NB! TODO: Add content to the content window.
  */
 list<WINDOW*> basic_window::create_window_list(int y, int x)
 {
@@ -71,8 +67,6 @@ list<WINDOW*> basic_window::create_window_list(int y, int x)
     }
     catch(...) { throw; }
 
-    /* FIXME: Does this cause my_list to be copied? It would still work, but
-     *        it would be more expensive. */
     return my_list;
 }
 

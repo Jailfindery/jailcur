@@ -6,6 +6,11 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
+/*******************************************************************************
+ * Apr.23, 2014: NB! These classes and functions have been depreciated in
+ * favour of boost::any.
+ ******************************************************************************/
+
 #ifndef JAILCUR_DATA_H_INCLUDED
 #define JAILCUR_DATA_H_INCLUDED
 

@@ -14,8 +14,9 @@
 
 #include <curses.h>
 
+#include <boost/any.hpp>
+
 #include "colour.h"
-#include "data.h"
 
 using namespace std;
 
@@ -41,7 +42,7 @@ class window_interface
     /* Returns the number of elements returned from create_win_ptr(). */
     virtual const int get_list_size() = 0;
 
-    virtual abstract_data::ptr get_input() = 0;
+    virtual boost::any get_input() = 0;
 };
 
 }

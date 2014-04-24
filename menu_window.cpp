@@ -11,6 +11,8 @@
 
 #include <curses.h>
 
+#include <boost/any.hpp>
+
 #include "menu_window.h"
 #include "util.h"
 
@@ -72,11 +74,11 @@ list<WINDOW*> menu_window::create_window_list(int y, int x)
 }
 
 /* Prompts the user to select a menu entry. Returns an integer inside of an
- * abstract_data::ptr.
+ * boost::any.
  */
-abstract_data::ptr menu_window::get_input()
+boost::any menu_window::get_input()
 {
-    abstract_data::ptr P;
+    boost::any A;
 
     try
     {
@@ -107,15 +109,11 @@ abstract_data::ptr menu_window::get_input()
         }
 
         /* Wrapping data in polymorphic type */
-        window_data<int>* D = new window_data<int>(choice);
-        P = abstract_data::ptr(dynamic_cast<abstract_data*>(D) );
-        if(P.get() == nullptr)
-            throw runtime_error("jailcur::menu_window::get_input(): "
-                                "Bad cast from window_data<int>* to abstract_data*");
+        A = choice;
     }
     catch(...) { throw; } // Rethrow exception
 
-    return P;
+    return A;
 }
 
 /* Deallocates resources associated with item_list and menu using the provided

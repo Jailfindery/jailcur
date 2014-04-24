@@ -11,11 +11,12 @@
 
 /* Meta-header to easily include all necessary headers for jailcur. */
 
+#include <boost/any.hpp>
+
 #include "basic_cwindow.h"
 #include "basic_message_window.h"
 #include "basic_window.h"
 #include "colour.h"
-#include "data.h"
 #include "jailcur_except.h"
 #include "menu_window.h"
 #include "message_window.h"

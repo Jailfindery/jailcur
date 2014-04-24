@@ -14,10 +14,10 @@
 
 #include <curses.h>
 
-#include "colour.h"
-#include "data.h"
-#include "standard.h"
+#include <boost/any.hpp>
 
+#include "colour.h"
+#include "standard.h"
 #include "window_interface.h"
 
 namespace jailcur
@@ -63,7 +63,7 @@ class basic_window : public window_interface
     string title;
 
     virtual const int get_list_size() { return 2; }
-    virtual abstract_data::ptr get_input();
+    virtual boost::any get_input();
 };
 
 }

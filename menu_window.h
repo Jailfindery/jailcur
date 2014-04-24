@@ -16,9 +16,10 @@
 #include <curses.h>
 #include <menu.h>
 
+#include <boost/any.hpp>
+
 #include "basic_cwindow.h"
 #include "colour.h"
-#include "data.h"
 #include "standard.h"
 
 using namespace std;
@@ -67,7 +68,7 @@ class menu_window : public basic_cwindow
     MENU* menu;
     vector<string> menu_options;
 
-    virtual abstract_data::ptr get_input();
+    virtual boost::any get_input();
     void delete_menu_objects();
 };
 

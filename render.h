@@ -12,7 +12,8 @@
 #include <utility>
 #include <vector>
 
-#include "data.h"
+#include <boost/any.hpp>
+
 #include "window_interface.h"
 
 using namespace std;
@@ -29,7 +30,7 @@ class window_render
   public:
     window_render() {}
 
-    static abstract_data::ptr get_top_input() { return get_top()->get_input(); }
+    static boost::any get_top_input() { return get_top()->get_input(); }
 
     static int size() { return desc_stack.size(); }
 

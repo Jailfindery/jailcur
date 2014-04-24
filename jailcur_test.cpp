@@ -106,16 +106,16 @@ int main()
         /* Removing windows */
         while(render.size() > 1)    // Leave the menu
         {
-            abstract_data::ptr P = render.get_top_input();
-            bool D = data_cast<bool>(P);
-            if(!D) throw runtime_error("False return from window");
+            boost::any A = render.get_top_input();
+            if(A.type() != typeid(bool) )
+                throw runtime_error("False return from window");
 
             render.pull_top();
         }
 
         /* Testing the menu win */
-        auto P = render.get_top_input();
-        choice = data_cast<int>(P);
+        auto A = render.get_top_input();
+        choice = boost::any_cast<int>(A);
         render.pull_top();
 
         standard.stop();
